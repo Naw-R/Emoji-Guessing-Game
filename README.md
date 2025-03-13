@@ -1,7 +1,7 @@
 # **Emoji Guessing Game**
 
 **Author**: Rowan Nasser and Maia Arrais Mateo  
-[**View this project online**](https://naw-r.github.io/CART-263/Projects/code/)
+[**View this project online**](https://naw-r.github.io/Emoji-Guessing-Game/)
 
 ---
 
