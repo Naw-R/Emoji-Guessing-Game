@@ -26,7 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("exit-game-btn").addEventListener("click", () => {
         console.log("Exit Game button clicked. Returning to LOBBY state."); // Debug log
-        switchState(states.LOBBY);
+        switchState(states.FEEDBACK);
+        clearInterval(timerInterval);
     });
 });
 
