@@ -1,0 +1,52 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Center everything */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #fff;
+}
+
+/* Hide inactive screens */
+.hidden {
+    display: none;
+}
+
+/* Screen Containers */
+.screen {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Headings */
+h1,
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+/* Category Buttons */
+#category-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.category-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #000;
+    background: none;
+    cursor: pointer;
+}
