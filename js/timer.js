@@ -18,7 +18,7 @@ function startTimer() {
             clearInterval(timerInterval);
             console.warn("Time's up! Moving to next round."); // Debug log
             alert(`Time's up! The correct answer was: ${currentEmoji.title}`);
-            startGame();
+            switchState(states.FEEDBACK);
         }
     }, 1000);
 }
@@ -30,6 +30,13 @@ function resetTimer() {
     startTimer();
 }
 
+// Stop the timer when the player loses or exits
+function stopTimer() {
+    console.log("Stopping timer..."); // Debug log
+    clearInterval(timerInterval);
+}
+
 // Expose globally for use in other scripts
 window.startTimer = startTimer;
 window.resetTimer = resetTimer;
+window.stopTimer = stopTimer; 

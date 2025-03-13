@@ -45,15 +45,19 @@
         <div id="game-timer">Timer: <span id="game-time">30</span>s</div>
     </div>
 
-    <!-- FEEDBACK SECTION (Hidden by default) -->
-    <div id="feedback-section" class="hidden">
-        <h3>Feedback</h3>
+    <!-- FEEDBACK SECTION  -->
+    <div id="feedback-screen" class="screen hidden">
+        <h3>Game Over</h3>
+        <p id="final-score">Final Score: 0</p>
         <textarea id="feedback-input" placeholder="What do you think about this emoji set?"></textarea>
+        <button id="return-menu-btn">Return</button>
         <button id="submit-feedback-btn">Submit Feedback</button>
+
     </div>
 
     <!-- Running Scripts -->
     <script src="js/stateManager.js"></script> <!-- Must load first -->
+    <script src="js/database.js"></script>
     <script src="js/script.js"></script>
     <script src="js/gameLogic.js"></script>
     <script src="js/timer.js"></script>

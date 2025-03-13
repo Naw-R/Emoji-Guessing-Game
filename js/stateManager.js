@@ -3,7 +3,8 @@
 const states = {
     MENU: "menu",
     LOBBY: "lobby",
-    GAME: "game"
+    GAME: "game",
+    FEEDBACK: "feedback"
 };
 
 let currentState = states.MENU;
@@ -21,6 +22,7 @@ function switchState(newState) {
     document.getElementById("menu-screen").classList.add("hidden");
     document.getElementById("lobby-screen").classList.add("hidden");
     document.getElementById("game-screen").classList.add("hidden");
+    document.getElementById("feedback-screen").classList.add("hidden");
 
     // Show the selected screen
     const newScreen = document.getElementById(`${newState}-screen`);
@@ -28,6 +30,11 @@ function switchState(newState) {
         newScreen.classList.remove("hidden");
         currentState = newState;
         console.log(`Successfully switched to ${newState} state.`); // Debug log
+        if (newState === "feedback") {
+            console.log("Game over: Stopping timer."); // Debug log
+            clearInterval(timerInterval); // Stop the timer
+            document.getElementById("final-score").innerText = `Final Score: ${score}`;
+        }
     } else {
         console.error(`Error: Invalid state "${newState}". No matching screen found.`); // Error log
     }
