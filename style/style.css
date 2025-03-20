@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+    background-color: linear-gradient(135deg, #2d6acb, #388eb6);
     color: #333;
 }
 
@@ -23,11 +23,11 @@ body {
 
 /* Screen Containers */
 .screen {
-    width: 90%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 700px;
     padding: 20px;
     text-align: center;
-    background: #ffffff;
+    background: linear-gradient(135deg, #e1885b, #c8da7d);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
 }
@@ -49,11 +49,11 @@ h2 {
 }
 
 .category-btn {
-    width: 100%;
+    width: 70%;
     padding: 10px;
     font-size: 1rem;
     border: none;
-    background: #4a90e2;
+    background: #1c1e21;
     color: white;
     font-weight: bold;
     border-radius: 8px;
@@ -76,13 +76,13 @@ h2 {
 #game-score {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #ff5f5f;
+    color: #5fff6c;
     margin: 10px 0;
 }
 
 /* User Input */
 #user-input {
-    width: 100%;
+    width: 80%;
     padding: 10px;
     font-size: 1rem;
     border: 2px solid #ccc;
@@ -100,7 +100,8 @@ h2 {
 button {
     padding: 12px;
     margin-top: 15px;
-    width: 100%;
+    width: 70%;
+    align-self: center;
     font-size: 1rem;
     border: none;
     border-radius: 8px;
@@ -110,20 +111,36 @@ button {
 
 /* Start & Return Buttons */
 #start-game-btn, #return-menu-btn, #exit-game-btn {
-    background: #28a745;
+    background: #2d2a28;
     color: white;
     font-weight: bold;
 }
 
 #start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover {
-    background: #218838;
+    background: #000000;
     transform: scale(1.05);
 }
 
-/* Input & Feedback */
-.feedback {
-    font-size: 1.1rem;
+#feedback-input {
+    width: 70%;
+    height: 50px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    resize: vertical; /* Allows users to resize vertically */
+    text-align: left; /* Align text to the left */
+    transition: border 0.3s ease;
+}
+
+/* Focus State for Textarea */
+#feedback-input:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+/* Textarea Placeholder */
+#feedback-input::placeholder {
+    color: #aaa;
     font-style: italic;
-    margin-top: 10px;
-    color: #ff5f5f;
 }
