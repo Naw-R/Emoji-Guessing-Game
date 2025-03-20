@@ -29,6 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
         switchState(states.FEEDBACK);
         clearInterval(timerInterval);
     });
+
+    // Attach event listener for the Return button in the Feedback state
+    document.getElementById("return-feedback-btn").addEventListener("click", () => {
+        console.log("Return button clicked in Feedback state. Switching to MENU."); // Debug log
+        switchState(states.MENU);
+    });
 });
 
 // Function to load category and move to Lobby
