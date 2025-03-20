@@ -1,4 +1,14 @@
-// stateManager.js - Handles switching between Menu, Lobby, and In-Game states
+/**
+ * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
+ * It handles game state management, puzzle initialization, user interactions, and overall game flow.
+ * 
+ * Functions Overview:
+ *   - switchState(newState): Switches between Menu, Lobby, Game, and Feedback states.
+ *   - Handles screen visibility based on the current state.
+ *   - Updates the final score and stops the timer when transitioning to Feedback state.
+ * 
+ * This file ensures seamless game flow by managing UI transitions dynamically.
+ */
 
 const states = {
     MENU: "menu",
@@ -30,9 +40,13 @@ function switchState(newState) {
         newScreen.classList.remove("hidden");
         currentState = newState;
         console.log(`Successfully switched to ${newState} state.`); // Debug log
+        
+        // Handle final score display in Feedback state
         if (newState === "feedback") {
             console.log("Game over: Stopping timer."); // Debug log
-            clearInterval(timerInterval); // Stop the timer
+            clearInterval(timerInterval); // Stop the game timer
+            
+            // Display final score in the Feedback screen
             document.getElementById("final-score").innerText = `Final Score: ${score}`;
         }
     } else {

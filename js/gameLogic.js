@@ -1,9 +1,20 @@
-// gameLogic.js - Manages game mechanics
+/**
+ * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
+ * It handles game state management, puzzle initialization, user interactions, and overall game flow.
+ * 
+ * Functions Overview:
+ *   - loadCategory(category): Loads and sets the selected emoji category, then transitions to the Lobby state.
+ *   - startGame(): Initializes a new round, selects a random emoji, and resets necessary states.
+ *   - handleGuess(): Processes user input, updates the score, and determines game progression.
+ *   - showHint(): Provides hints while deducting points based on hint usage.
+ * 
+ * This file ensures smooth gameplay mechanics by handling game logic dynamically.
+ */
 
 //global variables
 let score = 0;
 let currentEmoji = null;
-let hintUsed = 0; //track the number of hints the user has used
+let hintUsed = 0; // Track the number of hints the user has used
 let incorrectGuesses = 0; // Track incorrect guesses
 
 // Function to load the selected category
@@ -11,55 +22,45 @@ function loadCategory(category) {
     console.log(`loadCategory() called with category: ${category}`); // Debug log
 
     window.currentCategory = category; // Store selected category globally
-    document.getElementById("selected-category").innerText = category;
+    document.getElementById("selected-category").innerText = category; // Update UI
 
     console.log(`currentCategory is now set to: ${window.currentCategory}`); // Debug log
 
+    // Ensure state switching function exists
     if (typeof switchState === "function") {
         console.log("Switching state to LOBBY..."); // Debug log
-        switchState(states.LOBBY);
+        switchState(states.LOBBY); // Move to Lobby screen
     } else {
-        console.error("Error: switchState() is not available.");
+        console.error("Error: switchState() is not available."); // Debug log error if missing
     }
 }
 
-
 // Function to start a new game round
 function startGame() {
-    
     console.log("Starting new game round"); // Debug log
 
-    // Reset the number of incorrect guesses
-    incorrectGuesses = 0;
-    
-    // Get a random emoji from the current category
-    currentEmoji = getRandomEmoji(window.currentCategory);
-    
+    incorrectGuesses = 0; // Reset incorrect guess counter
+    currentEmoji = getRandomEmoji(window.currentCategory); // Get a random emoji
+
     if (!currentEmoji) {
         console.error("Error: Could not get emoji from database");
-        return;
+        return; // Exit function if no emoji is found
     }
 
     console.log(`Selected emoji: ${currentEmoji.emoji} (${currentEmoji.title})`); // Debug log
 
-    //currentEmoji.hints is an array
-    currentEmoji.hints = currentEmoji.hints || [];
+    currentEmoji.hints = currentEmoji.hints || []; // Ensure hints array exists
+    hintUsed = 0; // Reset hint counter
 
-    // Reset the hint counter each round
-    hintUsed = 0;
-    
-    // Update the display
+    // Update UI
     updateEmojiDisplay(currentEmoji.emoji);
     updateScoreDisplay();
     clearUserInput();
     
-    // Reset the timer
-    resetTimer();
-    
-    // Set focus on the input field
-    document.getElementById("user-input").focus();
-}
+    resetTimer(); // Restart the timer
 
+    document.getElementById("user-input").focus(); // Auto-focus input field
+}
 
 // Function to handle user guess submission
 function handleGuess() {
@@ -69,23 +70,24 @@ function handleGuess() {
     console.log(`User guessed: "${userGuess}". Correct answer: "${correctAnswer}"`); // Debug log
     
     if (userGuess === correctAnswer) {
-        // Correct answer
-        score += 10;
+        score += 10; // Increase score for correct answer
         updateScoreDisplay();
         alert("Correct! 🎉 +10 points");
-        startGame(); // Move to next round
+        startGame(); // Start next round
     } else {
-        //wrong answer 
-        incorrectGuesses++;
+        incorrectGuesses++; // Track wrong answers
+        
         if (score > 0) {
-            score -= 2;  // Subtract 2 points for incorrect guess, but only if score is greater than 0
+            score -= 2; // Deduct 2 points for incorrect guess (if score > 0)
         }
+
         updateScoreDisplay();
+
         if (incorrectGuesses >= 3) {
             alert(`Game Over! Final Score: ${score}`);
-            clearInterval(timerInterval); // Stop the timer before switching
+            clearInterval(timerInterval); // Stop timer before switching state
             switchState(states.FEEDBACK); // Move to feedback screen
-            return; // Exit function early to prevent new rounds from starting
+            return; // Prevent further execution
         } else {
             alert(`Try again! You've made ${incorrectGuesses} incorrect guesses.`);
             clearUserInput();
@@ -93,13 +95,12 @@ function handleGuess() {
     }
 }
 
-// Function to provide a hint
+// Function to provide hints
 function showHint() {
-    // Get the next hint from the current emoji's list of hints
     const hint = currentEmoji.hint;
-    
-    if (hintUsed < hint.length) {
 
+    if (hintUsed < hint.length) {
+        // Deduct points based on hint number
         if (hintUsed === 0) {
             score -= 1; // First hint costs 1 point
         } else if (hintUsed === 1) {
@@ -107,22 +108,18 @@ function showHint() {
         } else if (hintUsed === 2) {
             score -= 5; // Third hint costs 5 points
         }
-        updateScoreDisplay();
-        // Ensure score doesn't go below 0
-        score = Math.max(score, 0);
 
-        // Show the next hint
-        alert(`Hint ${hintUsed + 1}: ${hint[hintUsed]}`);
-        
-        // Increment the hint counter
-        hintUsed++;
+        updateScoreDisplay();
+        score = Math.max(score, 0); // Ensure score doesn't drop below 0
+
+        alert(`Hint ${hintUsed + 1}: ${hint[hintUsed]}`); // Show hint
+        hintUsed++; // Increment hint counter
     } else {
         alert("No more hints available for this emoji.");
     }
 }
 
-
-// Attach event listeners to category buttons
+// Event listeners for category selection
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Document fully loaded. Adding event listeners to category buttons."); // Debug log
 
@@ -135,17 +132,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-// Add event listeners for game buttons
+// Attach event listeners for game buttons
 document.getElementById("submit-btn").addEventListener("click", handleGuess);
 document.getElementById("hint-btn").addEventListener("click", showHint);
 
-// Add enter key support for guessing
+// Support Enter key for guessing
 document.getElementById("user-input").addEventListener("keypress", (event) => {
     if (event.key === "Enter") {
         handleGuess();
     }
 });
 
-// Expose functions globally
+// Expose functions globally for external use
 window.startGame = startGame;
 window.score = score;
