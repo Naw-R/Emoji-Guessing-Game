@@ -35,12 +35,12 @@ document.addEventListener("DOMContentLoaded", () => {
         switchState(states.MENU); // Go back to main menu
     });
 
-    // Exit Game Button - Ends game and transitions to FEEDBACK state
-    document.getElementById("exit-game-btn").addEventListener("click", () => {
-        console.log("Exit Game button clicked. Returning to FEEDBACK state."); // Debug log
-        switchState(states.FEEDBACK); // Switch to feedback screen
-        clearInterval(timerInterval); // Stop timer when exiting
-    });
+   // Exit Game Button - Ends game and transitions to FEEDBACK state
+document.getElementById("exit-game-btn").addEventListener("click", () => {
+    console.log("Exit Game button clicked. Returning to FEEDBACK state."); // Debug log
+    switchState(states.FEEDBACK); // Switch to feedback screen
+    clearInterval(timerInterval); // Stop timer when exiting
+});
 
     // Return Button in Feedback Screen - Goes back to Menu after feedback
     document.getElementById("return-feedback-btn").addEventListener("click", () => {
