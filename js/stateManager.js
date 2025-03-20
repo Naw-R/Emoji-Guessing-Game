@@ -41,6 +41,13 @@ function switchState(newState) {
         currentState = newState;
         console.log(`Successfully switched to ${newState} state.`); // Debug log
         
+        // Reset score when returning to Menu or Lobby
+        if (newState === "menu" || newState === "lobby") {
+            console.log("Resetting score for new game."); // Debug log
+            score = 0;
+            document.getElementById("game-score").innerText = score; // Update score display
+        }
+
         // Handle final score display in Feedback state
         if (newState === "feedback") {
             console.log("Game over: Stopping timer."); // Debug log
