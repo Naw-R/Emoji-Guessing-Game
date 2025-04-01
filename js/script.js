@@ -1,4 +1,4 @@
-/**
+/****
  * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
  * It handles game state management, puzzle initialization, user interactions, and overall game flow.
  * 
@@ -13,6 +13,7 @@
  * This file ensures smooth game progression by dynamically managing UI and event-driven interactions.
  * It utilizes Firebase for leaderboard functionality and provides a responsive user experience.
  */
+// Firebase is initialized via a script tag in index.html
 
 function initUsername() {
     // Retrieve stored username from local storage or create a default one
@@ -93,6 +94,16 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     }
+
+    // Event listener for submitting feedback
+    document.getElementById("submit-feedback-btn").addEventListener("click", () => {
+        const feedbackText = document.getElementById("feedback-input").value.trim();
+        if (feedbackText) {
+            submitFeedback(feedbackText, score, currentCategory);
+        } else {
+            alert("Please write something before submitting.");
+        }
+    });
 });
 
 // Submit score to Firebase leaderboard, only if it's the user's best score
@@ -194,4 +205,24 @@ async function showFullLeaderboard() {
     } catch (err) {
         console.error("Error displaying full leaderboard:", err); // Log any errors
     }
+}
+
+// Submit player feedback to Firestore
+function submitFeedback(message, score, category) {
+    if (!firebase || !firebase.firestore) return;
+
+    const db = firebase.firestore();
+    db.collection("feedback").add({
+        name: window.username,
+        category: category,
+        score: score,
+        message: message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }).then(() => {
+        alert("Thank you for your feedback!");
+        document.getElementById("feedback-input").value = "";
+    }).catch(error => {
+        console.error("Error submitting feedback:", error);
+        alert("There was a problem submitting your feedback.");
+    });
 }
