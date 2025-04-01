@@ -35,6 +35,8 @@ function initUsername() {
 document.addEventListener("DOMContentLoaded", () => {
     initUsername(); // Initialize the username
     updateBanner(); // Update the leaderboard banner
+    // Refresh leaderboard banner every 1 seconds
+    setInterval(updateBanner, 1000);
 
     // Event listeners for category buttons
     document.querySelectorAll(".category-btn").forEach(button => {
