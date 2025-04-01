@@ -93,24 +93,47 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Submit score to Firebase leaderboard
-function submitScore(score) {
-    // Check if Firebase is initialized
+// Submit score to Firebase leaderboard, only if it's the user's best score
+async function submitScore(score) {
     if (!firebase || !firebase.firestore) {
         console.error("Firebase not initialized.");
-        return; // Exit if Firebase is not set up
+        return;
     }
 
-    const db = firebase.firestore(); // Get Firestore database reference
-    db.collection("leaderboard").add({
-        name: window.username, // Username from global variable
-        score: score, // Score to submit
-        timestamp: firebase.firestore.FieldValue.serverTimestamp() // Server timestamp
-    }).then(() => {
-        console.log("Score submitted successfully."); // Log success
-    }).catch(error => {
-        console.error("Error submitting score:", error); // Log any errors
-    });
+    const db = firebase.firestore();
+    const leaderboardRef = db.collection("leaderboard");
+    const username = window.username;
+
+    try {
+        // Check if a score already exists for this username
+        const querySnapshot = await leaderboardRef.where("name", "==", username).get();
+
+        if (!querySnapshot.empty) {
+            const existingDoc = querySnapshot.docs[0];
+            const existingScore = existingDoc.data().score;
+
+            if (score > existingScore) {
+                // Update with the new higher score
+                await leaderboardRef.doc(existingDoc.id).update({
+                    score: score,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                console.log("Score updated successfully.");
+            } else {
+                console.log("Score not high enough to update leaderboard.");
+            }
+        } else {
+            // No score yet for this user, add a new one
+            await leaderboardRef.add({
+                name: username,
+                score: score,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            console.log("New score submitted.");
+        }
+    } catch (error) {
+        console.error("Error submitting or updating score:", error);
+    }
 }
 
 // Fetch top 3 scores and update leaderboard banner
