@@ -3,66 +3,170 @@
  * It handles game state management, puzzle initialization, user interactions, and overall game flow.
  * 
  * Functions Overview:
- *   - loadCategory(category): Loads and sets the selected emoji category, then transitions to the Lobby state.
- *   - Handles game state changes and UI transitions.
- *   - Attaches event listeners for category selection, starting the game, exiting, and returning to the menu.
+ *   - initUsername(): Initializes and stores a user-friendly player name.
+ *   - loadCategory(category): Loads and sets the selected emoji category.
+ *   - submitScore(score): Saves player score to Firebase leaderboard.
+ *   - updateBanner(): Displays top scores in the header banner.
+ *   - populateLeaderboardTable(): Shows full leaderboard on leaderboard screen.
+ *   - Event listeners for starting the game, returning to menu, exiting, and switching screens.
  * 
  * This file ensures smooth game progression by dynamically managing UI and event-driven interactions.
+ * It utilizes Firebase for leaderboard functionality and provides a responsive user experience.
  */
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Game Initialized! DOM fully loaded."); // Debug log
+function initUsername() {
+    // Retrieve stored username from local storage or create a default one
+    let storedName = localStorage.getItem("username");
+    if (!storedName) {
+        const randomNum = Math.floor(Math.random() * 9000) + 1000; // Generate a random number
+        storedName = `Player${randomNum}`; // Default username format
+        localStorage.setItem("username", storedName); // Store the username
+    }
+    window.username = storedName; // Set global username variable
 
-    // Attach event listeners for category selection buttons
+    // Update the display with the username
+    const display = document.getElementById("username-display");
+    if (display) {
+        display.textContent = `Welcome, ${window.username}!`;
+    }
+}
+
+// Set up event listeners and initialize game state once the DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    initUsername(); // Initialize the username
+    updateBanner(); // Update the leaderboard banner
+
+    // Event listeners for category buttons
     document.querySelectorAll(".category-btn").forEach(button => {
-        console.log(`Attaching event listener to category button: ${button.innerText}`); // Debug log
         button.addEventListener("click", () => {
-            console.log(`Category button clicked: ${button.getAttribute("data-category")}`); // Debug log
-            loadCategory(button.getAttribute("data-category")); // Load selected emoji category
+            const category = button.getAttribute("data-category"); // Get category from button
+            loadCategory(category); // Load the selected category
         });
     });
 
-    // Start Game Button - Switch to GAME state and begin gameplay
+    // Event listener for starting the game
     document.getElementById("start-game-btn").addEventListener("click", () => {
-        console.log("Start Game button clicked. Switching to GAME state."); // Debug log
-        switchState(states.GAME); // Change game state to active play
-        startGame(); // Initialize game logic
+        console.log("Game started!");
+        switchState("game"); // Change the game state to 'game'
+        if (typeof startGame === "function") {
+            startGame(); // Start the game if the function is defined
+        } else {
+            console.warn("startGame() is not defined");
+        }
     });
 
-    // Return to Menu Button (General) - Navigates to the main menu
+    // Event listener for returning to menu
     document.getElementById("return-menu-btn").addEventListener("click", () => {
-        console.log("Return button clicked. Switching to MENU state."); // Debug log
-        switchState(states.MENU); // Go back to main menu
+        console.log("Returning to menu...");
+        switchState("menu"); // Change the game state to 'menu'
     });
 
-   // Exit Game Button - Ends game and transitions to FEEDBACK state
-document.getElementById("exit-game-btn").addEventListener("click", () => {
-    console.log("Exit Game button clicked. Returning to FEEDBACK state."); // Debug log
-    switchState(states.FEEDBACK); // Switch to feedback screen
-    clearInterval(timerInterval); // Stop timer when exiting
-});
+    // Event listener for exiting the game
+    document.getElementById("exit-game-btn").addEventListener("click", () => {
+        console.log("Exiting game...");
+        switchState("feedback"); // Change the game state to 'feedback'
+    });
 
-    // Return Button in Feedback Screen - Goes back to Menu after feedback
+    // Event listener for returning from feedback
     document.getElementById("return-feedback-btn").addEventListener("click", () => {
-        console.log("Return button clicked in Feedback state. Switching to MENU."); // Debug log
-        switchState(states.MENU); // Return to main menu from feedback
+        console.log("Returning from feedback...");
+        switchState("menu"); // Change the game state to 'menu'
     });
+
+    // Event listener for returning to menu from leaderboard
+    document.getElementById("return-menu-from-leaderboard").addEventListener("click", () => {
+        console.log("Returning to menu from leaderboard...");
+        switchState("menu"); // Change the game state to 'menu'
+    });
+
+    // Event listener for leaderboard banner click
+    const leaderboardBanner = document.getElementById("leaderboard-banner");
+    if (leaderboardBanner) {
+        leaderboardBanner.addEventListener("click", () => {
+            if (typeof currentState !== "undefined" && currentState === "menu") {
+                switchState("leaderboard"); // Change state to 'leaderboard'
+                showFullLeaderboard(); // Show full leaderboard
+            } else {
+                alert("Leaderboard can be viewed fully from the main menu!"); // Alert if not in menu
+            }
+        });
+    }
 });
 
-// Loads the selected emoji category and moves to the Lobby screen
-function loadCategory(category) {
-    console.log(`loadCategory() called with category: ${category}`); // Debug log
+// Submit score to Firebase leaderboard
+function submitScore(score) {
+    // Check if Firebase is initialized
+    if (!firebase || !firebase.firestore) {
+        console.error("Firebase not initialized.");
+        return; // Exit if Firebase is not set up
+    }
 
-    window.currentCategory = category; // Store selected category globally
-    document.getElementById("selected-category").innerText = currentCategory; // Update UI text
+    const db = firebase.firestore(); // Get Firestore database reference
+    db.collection("leaderboard").add({
+        name: window.username, // Username from global variable
+        score: score, // Score to submit
+        timestamp: firebase.firestore.FieldValue.serverTimestamp() // Server timestamp
+    }).then(() => {
+        console.log("Score submitted successfully."); // Log success
+    }).catch(error => {
+        console.error("Error submitting score:", error); // Log any errors
+    });
+}
 
-    console.log(`currentCategory updated: ${window.currentCategory}`); // Debug log
+// Fetch top 3 scores and update leaderboard banner
+async function updateBanner() {
+    // Check if Firebase is initialized
+    if (!firebase || !firebase.firestore) {
+        console.error("Firebase not initialized.");
+        return; // Exit if Firebase is not set up
+    }
 
-    // Ensure `switchState` function exists before calling it
-    if (typeof switchState === "function") {
-        console.log("Switching to LOBBY state..."); // Debug log
-        switchState(states.LOBBY); // Transition to Lobby screen
-    } else {
-        console.error("Error: switchState() is not available."); // Debug log error if function is missing
+    const db = firebase.firestore(); // Get Firestore database reference
+    try {
+        const snapshot = await db.collection("leaderboard")
+            .orderBy("score", "desc") // Order by score descending
+            .orderBy("timestamp", "asc") // Order by timestamp ascending
+            .limit(3) // Limit to top 3 scores
+            .get();
+
+        console.log("Fetched leaderboard docs:", snapshot.docs.map(doc => doc.data())); // Log fetched documents
+        const topScores = snapshot.docs.map(doc => doc.data()); // Extract top scores
+        const bannerText = topScores.map(entry =>
+            `${entry.name || "Anon"}: ${entry.score || 0}` // Format banner text
+        ).join(" | ");
+        const banner = document.getElementById("top-scores-text");
+        if (banner) {
+            banner.textContent = `Top Scores: ${bannerText}`; // Update banner text
+        }
+    } catch (error) {
+        console.error("Error fetching leaderboard:", error); // Log any errors
+    }
+}
+
+// Load top 10 scores into leaderboard screen
+async function showFullLeaderboard() {
+    // Check if Firebase is initialized
+    if (!firebase || !firebase.firestore) return; // Exit if Firebase is not set up
+
+    const db = firebase.firestore(); // Get Firestore database reference
+    try {
+        const snapshot = await db.collection("leaderboard")
+            .orderBy("score", "desc") // Order by score descending
+            .orderBy("timestamp", "asc") // Order by timestamp ascending
+            .limit(10) // Limit to top 10 scores
+            .get();
+
+        const tbody = document.querySelector("#leaderboard-table tbody");
+        if (tbody) {
+            tbody.innerHTML = ""; // Clear existing leaderboard
+            snapshot.forEach(doc => {
+                const { name, score } = doc.data(); // Extract name and score
+                const row = document.createElement("tr");
+                row.innerHTML = `<td>${name}</td><td>${score}</td>`; // Create table row
+                tbody.appendChild(row); // Append row to table body
+            });
+        }
+    } catch (err) {
+        console.error("Error displaying full leaderboard:", err); // Log any errors
     }
 }

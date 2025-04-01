@@ -1,50 +1,62 @@
 /**
- * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
- * It handles game state management, puzzle initialization, user interactions, and overall game flow.
+ * stateManager.js
+ * ----------------
+ * This module handles all screen state transitions in the Emoji Guessing Game.
+ * It controls which screen (menu, lobby, game, feedback, leaderboard) is visible
+ * at any given moment, and also updates the score display and final score when needed.
+ *
+ * Functions:
+ * - switchState(newState): Dynamically shows the requested screen and performs related state-specific logic.
  * 
- * Functions Overview:
- *   - switchState(newState): Switches between Menu, Lobby, Game, and Feedback states.
- *   - Handles screen visibility based on the current state.
- *   - Updates the final score and stops the timer when transitioning to Feedback state.
- * 
- * This file ensures seamless game flow by managing UI transitions dynamically.
+ * Key Features:
+ * - Maintains a centralized 'states' object for clean and readable state references.
+ * - Updates the player's score when moving into or out of game-related screens.
+ * - Stops the game timer and displays final score upon entering the feedback screen.
+ *
+ * Global Variables Exposed:
+ * - window.switchState
+ * - window.states
  */
 
+// Define the different states of the game
 const states = {
     MENU: "menu",
     LOBBY: "lobby",
     GAME: "game",
-    FEEDBACK: "feedback"
+    FEEDBACK: "feedback",
+    LEADERBOARD: "leaderboard"
 };
 
+// Initialize the current state to MENU
 let currentState = states.MENU;
 
 // Define `currentCategory` only if it doesn't already exist
 if (typeof window.currentCategory === "undefined") {
-    window.currentCategory = "";
+    window.currentCategory = ""; // Initialize currentCategory as an empty string
 }
 
 // Function to switch between game states
 function switchState(newState) {
     console.log(`switchState() called. Switching from ${currentState} to ${newState}`); // Debug log
 
-    // Hide all screens
+    // Hide all screens to prepare for the new state
     document.getElementById("menu-screen").classList.add("hidden");
     document.getElementById("lobby-screen").classList.add("hidden");
     document.getElementById("game-screen").classList.add("hidden");
     document.getElementById("feedback-screen").classList.add("hidden");
+    document.getElementById("leaderboard-screen").classList.add("hidden");
 
-    // Show the selected screen
+    // Show the selected screen based on the new state
     const newScreen = document.getElementById(`${newState}-screen`);
     if (newScreen) {
-        newScreen.classList.remove("hidden");
-        currentState = newState;
+        newScreen.classList.remove("hidden"); // Display the new state screen
+        currentState = newState; // Update the current state
         console.log(`Successfully switched to ${newState} state.`); // Debug log
         
-        // Reset score when returning to Menu or Lobby
-        if (newState === "menu" || newState === "lobby") {
+        // Reset score when returning to Menu, Lobby, or Leaderboard
+        if (newState === "menu" || newState === "lobby" || newState === "leaderboard") {
             console.log("Resetting score for new game."); // Debug log
-            score = 0;
+            score = 0; // Reset score to zero
             document.getElementById("game-score").innerText = score; // Update score display
         }
 
@@ -61,6 +73,6 @@ function switchState(newState) {
     }
 }
 
-// Expose globally
+// Expose globally for access in other parts of the application
 window.switchState = switchState;
 window.states = states;

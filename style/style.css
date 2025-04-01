@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Center everything */
+/* Center everything in the viewport */
 body {
     display: flex;
     justify-content: center;
@@ -16,12 +16,12 @@ body {
     color: #333;
 }
 
-/* Hide inactive screens */
+/* Hide elements that are not currently active */
 .hidden {
     display: none;
 }
 
-/* Screen Containers */
+/* Style for screen containers that hold different game sections */
 .screen {
     width: 100%;
     max-width: 700px;
@@ -32,7 +32,7 @@ body {
     border-radius: 12px;
 }
 
-/* Headings */
+/* Headings style for main titles and subtitles */
 h1,
 h2 {
     font-size: 1.5rem;
@@ -41,13 +41,14 @@ h2 {
     font-weight: 600;
 }
 
-/* Category Buttons */
+/* Layout for category selection buttons */
 #category-buttons {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
+/* Style for individual category buttons */
 .category-btn {
     width: 70%;
     padding: 10px;
@@ -61,18 +62,19 @@ h2 {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Emoji Display */
+/* Display style for the emoji being guessed */
 #emoji-display {
     font-size: 3rem;
     margin: 20px 0;
     transition: transform 0.3s ease;
 }
 
+/* Scale up the emoji on hover for emphasis */
 #emoji-display:hover {
     transform: scale(1.5);
 }
 
-/* Score Display */
+/* Style for displaying the current game score */
 #game-score {
     font-size: 1.5rem;
     font-weight: bold;
@@ -80,7 +82,7 @@ h2 {
     margin: 10px 0;
 }
 
-/* User Input */
+/* Style for user input field */
 #user-input {
     width: 80%;
     padding: 10px;
@@ -91,12 +93,13 @@ h2 {
     transition: border 0.3s ease;
 }
 
+/* Focus state for user input field */
 #user-input:focus {
     border-color: #4a90e2;
     outline: none;
 }
 
-/* Buttons */
+/* General button styles */
 button {
     padding: 12px;
     margin-top: 15px;
@@ -109,18 +112,20 @@ button {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
-/* Start & Return Buttons */
+/* Specific styles for start and return buttons */
 #start-game-btn, #return-menu-btn, #exit-game-btn {
     background: #2d2a28;
     color: white;
     font-weight: bold;
 }
 
+/* Hover effect for action buttons */
 #start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover {
     background: #000000;
     transform: scale(1.05);
 }
 
+/* Style for feedback input area */
 #feedback-input {
     width: 70%;
     height: 50px;
@@ -133,14 +138,70 @@ button {
     transition: border 0.3s ease;
 }
 
-/* Focus State for Textarea */
+/* Focus state for feedback input */
 #feedback-input:focus {
     border-color: #4a90e2;
     outline: none;
 }
 
-/* Textarea Placeholder */
+/* Placeholder style for feedback input */
 #feedback-input::placeholder {
     color: #aaa;
     font-style: italic;
+}
+
+/* Banner style for the leaderboard */
+.leaderboard-banner {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: #222;
+    color: #fff;
+    text-align: center;
+    padding: 8px;
+    font-weight: bold;
+    z-index: 1000;
+    cursor: pointer;
+}
+
+/* Hover effect for leaderboard banner */
+.leaderboard-banner:hover {
+    background: #444;
+}
+
+/* Style for the leaderboard table */
+#leaderboard-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Table header and cell styles */
+#leaderboard-table th,
+#leaderboard-table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 1rem;
+}
+
+/* Header styles for leaderboard table */
+#leaderboard-table th {
+    background: #2d6acb;
+    color: white;
+    font-weight: bold;
+}
+
+/* Zebra striping for table rows */
+#leaderboard-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect for table rows */
+#leaderboard-table tr:hover {
+    background-color: #e6f0ff;
 }
