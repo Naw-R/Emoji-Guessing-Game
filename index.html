@@ -51,6 +51,18 @@
         <div id="game-timer">Timer: <span id="game-time">30</span>s</div>
     </div>
 
+    <!-- Guesses Icons -->
+    <div id="feedback">
+        <div id="checkmark" class="hidden">✅</div>
+        <div id="wrong-attempts">
+            <span class="x-icon hidden">❌</span>
+            <span class="x-icon hidden">❌</span>
+            <span class="x-icon hidden">❌</span>
+        </div>
+    </div>
+
+    <div id="background-animation"></div>
+
     <!-- FEEDBACK SECTION  -->
     <div id="feedback-screen" class="screen hidden">
         <h3>Game Over</h3>
@@ -84,6 +96,7 @@
     <!-- Running Scripts -->
     <script src="js/stateManager.js"></script> <!-- Must load first -->
     <script src="js/database.js"></script>
+    <script src ="js/emojiManager.js"></script>
     <script src="js/script.js"></script>
     <script src="js/gameLogic.js"></script>
     <script src="js/timer.js"></script>

@@ -11,28 +11,54 @@
  */
 const emojiDatabase = {
     "movies": [
-        { emoji: "🧙‍♂️👓⚡", title: "Harry Potter", hint: ["A wizarding world", "Diagon Alley", "Harry's lightning bolt scar"] },
-        { emoji: "🦁👑🌍", title: "The Lion King", hint: ["The circle of life", "Hakuna Matata", "Simba and Mufasa"] },
-        { emoji: "🚢❄️💔", title: "Titanic", hint: ["A doomed voyage", "The iceberg disaster", "Jack and Rose's love story"] },
-        { emoji: "👸❄️☃️", title: "Frozen", hint: ["An ice queen", "Let it go", "Elsa and Anna's bond"] },
-        { emoji: "🔍🐠", title: "Finding Nemo", hint: ["A lost fish", "Just keep swimming", "Marlin and Dory's ocean adventure"] },
-        { emoji: "🕷️🧔", title: "Spider-Man", hint: ["A web-slinging superhero", "With great power...", "Peter Parker"] },
-        { emoji: "🤖❤️🌱", title: "WALL-E", hint: ["Post-apocalyptic Earth", "A robot cleaning the planet", "Love in the form of a plant"] },
-        { emoji: "👻👻👻👨", title: "Ghostbusters", hint: ["Ghost hunting team", "Who you gonna call?", "The Stay Puft Marshmallow Man"] },
-        { emoji: "🦖🏝️", title: "Jurassic Park", hint: ["Dinosaurs on the loose", "Life finds a way", "A theme park gone wrong"] },
-        { emoji: "🦇👨🃏", title: "The Dark Knight", hint: ["The Joker's reign of terror", "Why so serious?", "Batman vs The Joker"] },
-        { emoji: "👽🌌🚀", title: "E.T.", hint: ["An alien from another world", "Phone home", "A boy befriends a stranded alien"] },
-        { emoji: "🦸‍♂️🛸", title: "Superman", hint: ["Kryptonian hero", "Faster than a speeding bullet", "Clark Kent and Lois Lane"] },
-        { emoji: "🕷️🖤", title: "Venom", hint: ["Alien symbiote", "Anti-hero", "Eddie Brock's transformation"] },
-        { emoji: "⚔️🏰", title: "Gladiator", hint: ["Fighting in the arena", "Revenge and honor", "Maximus Decimus Meridius"] },
-        { emoji: "🔫💥", title: "Die Hard", hint: ["Christmas action movie", "Yippee-ki-yay", "Bruce Willis as John McClane"] },
-        { emoji: "🌎👾", title: "The Matrix", hint: ["A simulated reality", "Red pill or blue pill?", "Neo's journey to freedom"] },
-        { emoji: "🦸‍♀️💥", title: "Wonder Woman", hint: ["Amazonian warrior", "God killer", "Diana Prince"] },
-        { emoji: "🦷👽", title: "Men in Black", hint: ["Alien secret agents", "The neuralyzer", "Will Smith and Tommy Lee Jones"] },
-        { emoji: "🚕🚨", title: "Taxi Driver", hint: ["A New York vigilante", "Mental instability", "Robert De Niro as Travis Bickle"] },
-        { emoji: "🏹🎯", title: "The Hunger Games", hint: ["Dystopian society", "The Mockingjay", "Katniss Everdeen's rebellion"] },
-        { emoji: "🦇👨🃏", title: "The Dark Knight", hint: ["The Joker's reign of terror", "Why so serious?", "Batman vs The Joker"] }
+        { "emoji": "🧙‍♂️👓⚡", "title": "Harry Potter", "hint": ["A wizarding world", "Diagon Alley", "Harry's lightning bolt scar"] },
+        { "emoji": "🦁👑🌍", "title": "The Lion King", "hint": ["The circle of life", "Hakuna Matata", "Simba and Mufasa"] },
+        { "emoji": "🚢❄️💔", "title": "Titanic", "hint": ["A doomed voyage", "The iceberg disaster", "Jack and Rose's love story"] },
+        { "emoji": "👸❄️☃️", "title": "Frozen", "hint": ["An ice queen", "Let it go", "Elsa and Anna's bond"] },
+        { "emoji": "🔍🐠", "title": "Finding Nemo", "hint": ["A lost fish", "Just keep swimming", "Marlin and Dory's ocean adventure"] },
+        { "emoji": "🕷️🧔", "title": "Spider-Man", "hint": ["A web-slinging superhero", "With great power...", "Peter Parker"] },
+        { "emoji": "🤖❤️🌱", "title": "WALL-E", "hint": ["Post-apocalyptic Earth", "A robot cleaning the planet", "Love in the form of a plant"] },
+        { "emoji": "👻👻👻👨", "title": "Ghostbusters", "hint": ["Ghost hunting team", "Who you gonna call?", "The Stay Puft Marshmallow Man"] },
+        { "emoji": "🦖🏝️", "title": "Jurassic Park", "hint": ["Dinosaurs on the loose", "Life finds a way", "A theme park gone wrong"] },
+        { "emoji": "🦇👨🃏", "title": "The Dark Knight", "hint": ["The Joker's reign of terror", "Why so serious?", "Batman vs The Joker"] },
+        { "emoji": "👽🌌🚀", "title": "E.T.", "hint": ["An alien from another world", "Phone home", "A boy befriends a stranded alien"] },
+        { "emoji": "🦸‍♂️🛸", "title": "Superman", "hint": ["Kryptonian hero", "Faster than a speeding bullet", "Clark Kent and Lois Lane"] },
+        { "emoji": "🕷️🖤", "title": "Venom", "hint": ["Alien symbiote", "Anti-hero", "Eddie Brock's transformation"] },
+        { "emoji": "⚔️🏰", "title": "Gladiator", "hint": ["Fighting in the arena", "Revenge and honor", "Maximus Decimus Meridius"] },
+        { "emoji": "🔫💥", "title": "Die Hard", "hint": ["Christmas action movie", "Yippee-ki-yay", "Bruce Willis as John McClane"] },
+        { "emoji": "🌎👾", "title": "The Matrix", "hint": ["A simulated reality", "Red pill or blue pill?", "Neo's journey to freedom"] },
+        { "emoji": "🦸‍♀️💥", "title": "Wonder Woman", "hint": ["Amazonian warrior", "God killer", "Diana Prince"] },
+        { "emoji": "🦷👽", "title": "Men in Black", "hint": ["Alien secret agents", "The neuralyzer", "Will Smith and Tommy Lee Jones"] },
+        { "emoji": "🚕🚨", "title": "Taxi Driver", "hint": ["A New York vigilante", "Mental instability", "Robert De Niro as Travis Bickle"] },
+        { "emoji": "🏹🎯", "title": "The Hunger Games", "hint": ["Dystopian society", "The Mockingjay", "Katniss Everdeen's rebellion"] },
+        { "emoji": "🦇👨🃏", "title": "The Dark Knight", "hint": ["The Joker's reign of terror", "Why so serious?", "Batman vs The Joker"] },
+        { "emoji": "🧟‍♂️💀", "title": "The Walking Dead", "hint": ["Zombie apocalypse", "Survival of the fittest", "Rick Grimes and his group"] },
+        { "emoji": "🦸‍♂️🔥", "title": "Iron Man", "hint": ["Genius billionaire", "Iron suit", "Tony Stark"] },
+        { "emoji": "🧛‍♀️🦇", "title": "Twilight", "hint": ["Vampires and werewolves", "Forbidden love", "Bella and Edward's love story"] },
+        { "emoji": "🌪️👠", "title": "The Wizard of Oz", "hint": ["A tornado takes her home", "Follow the yellow brick road", "Ruby slippers"] },
+        { "emoji": "⏳⚔️", "title": "Inception", "hint": ["Dream within a dream", "Mind bending concepts", "The spinning top"] },
+        { "emoji": "🧟‍♂️🏃‍♀️", "title": "28 Days Later", "hint": ["A viral outbreak", "Zombies", "Survival in a post-apocalyptic world"] },
+        { "emoji": "💣🎒", "title": "Mission: Impossible", "hint": ["Spy thriller", "Impossible missions", "Tom Cruise as Ethan Hunt"] },
+        { "emoji": "🚴‍♂️🏅", "title": "Breaking Away", "hint": ["Bicycle racing", "Coming of age", "Small town dreams"] },
+        { "emoji": "🧑‍🍳🍲", "title": "Ratatouille", "hint": ["A rat who wants to be a chef", "Parisian kitchen", "Remy and Linguini"] },
+        { "emoji": "🏠👹", "title": "The Conjuring", "hint": ["Haunted house", "Paranormal investigation", "Ed and Lorraine Warren"] },
+        { "emoji": "🧳✈️", "title": "Up", "hint": ["A house floating with balloons", "An old man’s dream", "Adventure and grief"] },
+        { "emoji": "🧑‍🚀🌍", "title": "Interstellar", "hint": ["Space travel", "Time dilation", "Saving humanity"] },
+        { "emoji": "🐱👓", "title": "The Cat in the Hat", "hint": ["A mischievous cat", "A magical hat", "Two kids' wild day"] },
+        { "emoji": "🧠💡", "title": "A Beautiful Mind", "hint": ["A brilliant mathematician", "Schizophrenia", "John Nash"] },
+        { "emoji": "🍿🎥", "title": "The Godfather", "hint": ["Organized crime", "The Corleone family", "Vito and Michael"] },
+        { "emoji": "🎻💃", "title": "La La Land", "hint": ["Musical love story", "Hollywood dreams", "Emma Stone and Ryan Gosling"] },
+        { "emoji": "⛷️🏔️", "title": "Everest", "hint": ["Climbing the highest mountain", "Survival against nature", "Based on a true story"] },
+        { "emoji": "👑🇬🇧", "title": "The Crown", "hint": ["Royal family drama", "Queen Elizabeth II", "The history of the British monarchy"] },
+        { "emoji": "🦄🌟", "title": "The NeverEnding Story", "hint": ["A magical land", "A boy's adventure", "Falkor the luck dragon"] },
+        { "emoji": "🏀🎯", "title": "Space Jam", "hint": ["Basketball and cartoons", "Michael Jordan", "Looney Tunes"] },
+        { "emoji": "🎹👨‍🎤", "title": "Bohemian Rhapsody", "hint": ["The rise of Queen", "Freddie Mercury", "A musical journey"] },
+        { "emoji": "👨‍🍳🍔", "title": "Chef", "hint": ["Food truck", "Gourmet cooking", "Father-son relationship"] },
+        { "emoji": "🎡🎪", "title": "The Greatest Showman", "hint": ["The circus", "A musical about P.T. Barnum", "Showmanship and dreams"] },
+        { "emoji": "🧙‍♂️🏞️", "title": "The Hobbit", "hint": ["A journey through Middle Earth", "Smaug the dragon", "Bilbo Baggins"] },
+        { "emoji": "⚰️💀", "title": "The Sixth Sense", "hint": ["A young boy who sees dead people", "Psychic abilities", "Bruce Willis' twist ending"] }
     ],
+
     "songs": [
         { emoji: "⭐🧑‍🚀", title: "Rocket Man", hint: ["An astronaut's tale", "Elton John classic", "Flying solo in space"] },
         { emoji: "🌧️💜", title: "Purple Rain", hint: ["A stormy love song", "Prince's signature track", "I never meant to cause you any sorrow"] },
@@ -143,42 +169,3 @@ const emojiDatabase = {
         { emoji: "📦📦", title: "Amazon", hint: ["E-commerce giant", "The Everything Store", "Prime delivery service"] }
     ]
 };
-// Object to track used emojis for each category
-const usedEmojis = {};
-
-
-// Function to get a random emoji from a specific category without repeating
-function getRandomEmoji(category) {
-    console.log(`Getting random emoji from category: ${category}`); // Debug log
-    
-    // Initialize usedEmojis tracking for the category if it doesn't exist
-    if (!usedEmojis[category]) {
-        usedEmojis[category] = new Set();
-    }
-
-    // Get the list of available emojis in the category
-    const availableEmojis = emojiDatabase[category].filter(emoji => 
-        !usedEmojis[category].has(emoji.title) // Ensure it's not used yet
-    );
-
-    // If all emojis have been used, reset the used set to allow reuse
-    if (availableEmojis.length === 0) {
-        console.warn(`All emojis in category "${category}" have been used. Resetting...`);
-        usedEmojis[category].clear();
-        return getRandomEmoji(category); // Recursively call to start fresh
-    }
-
-    // Select a random index from the available emojis
-    const randomIndex = Math.floor(Math.random() * availableEmojis.length);
-    const selectedEmoji = availableEmojis[randomIndex];
-
-    // Mark the selected emoji as used
-    usedEmojis[category].add(selectedEmoji.title);
-
-    console.log(`Selected emoji: ${selectedEmoji.emoji} (${selectedEmoji.title})`); // Debug log
-    return selectedEmoji;
-}
-
-// Expose functions and data globally
-window.emojiDatabase = emojiDatabase;
-window.getRandomEmoji = getRandomEmoji;
