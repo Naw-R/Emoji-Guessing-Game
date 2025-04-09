@@ -45,6 +45,8 @@ function loadCategory(category) {
 function startGame() {
     console.log("Starting new game round"); // Debug log
 
+    resetFeedback(); // ✅ Reset all feedback animations/icons
+
     incorrectGuesses = 0; // Reset incorrect guess counter for the new round
     currentEmoji = getRandomEmoji(window.currentCategory); // Get a random emoji from the selected category
 
@@ -76,11 +78,19 @@ function handleGuess() {
     console.log(`User guessed: "${userGuess}". Correct answer: "${correctAnswer}"`); // Debug log user guess and correct answer
     
     if (userGuess === correctAnswer) { // Check if the user's guess is correct
+        showCheckmark(); // ✅ Animation for correct answer
         score += 10; // Increase score by 10 for a correct answer
         updateScoreDisplay(); // Update the score display
-        alert("Correct! 🎉 +10 points"); // Notify user of correct guess
-        startGame(); // Start the next round
+        // Show the checkmark
+        document.getElementById('checkmark').classList.add('show');
+
+        // Wait for animation to complete before moving to next screen
+        setTimeout(() => {
+            document.getElementById('checkmark').classList.remove('show');
+            startGame(); // Start the next round
+        }, 1500); // Adjust timing as needed
     } else {
+        showWrongAttempt(); // Show X mark for wrong attempt
         incorrectGuesses++; // Increment the count of incorrect guesses
         
         if (score > 0) {
@@ -96,7 +106,7 @@ function handleGuess() {
             switchState(states.FEEDBACK); // Move to feedback screen
             return; // Prevent further execution
         } else {
-            alert(`Try again! You've made ${incorrectGuesses} incorrect guesses.`); // Prompt user to try again
+            // alert(`Try again! You've made ${incorrectGuesses} incorrect guesses.`); // Prompt user to try again
             clearUserInput(); // Clear user input for the next guess
         }
     }

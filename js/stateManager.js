@@ -58,12 +58,15 @@ function switchState(newState) {
             console.log("Resetting score for new game."); // Debug log
             score = 0; // Reset score to zero
             document.getElementById("game-score").innerText = score; // Update score display
+            resetFeedback();
         }
 
         // Handle final score display in Feedback state
         if (newState === "feedback") {
             console.log("Game over: Stopping timer."); // Debug log
             clearInterval(timerInterval); // Stop the game timer
+            resetFeedback();
+
             
             // Display final score in the Feedback screen
             document.getElementById("final-score").innerText = `Final Score: ${score}`;

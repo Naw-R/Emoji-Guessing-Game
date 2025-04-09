@@ -215,30 +215,11 @@ function submitFeedback(message, score, category) {
 }
 
 
-// Firebase is initialized via a script tag in index.html
-
-function initUsername() {
-    // Retrieve stored username from local storage or create a default one
-    let storedName = localStorage.getItem("username");
-    if (!storedName) {
-        const randomNum = Math.floor(Math.random() * 9000) + 1000; // Generate a random number
-        storedName = `Player${randomNum}`; // Default username format
-        localStorage.setItem("username", storedName); // Store the username
-    }
-    window.username = storedName; // Set global username variable
-
-    // Update the display with the username
-    const display = document.getElementById("username-display");
-    if (display) {
-        display.textContent = `Welcome, ${window.username}!`;
-    }
-}
-
 // Set up event listeners and initialize game state once the DOM is fully loaded
 document.addEventListener("DOMContentLoaded", () => {
     initUsername(); // Initialize the username
     updateBanner(); // Update the leaderboard banner
-    // Refresh leaderboard banner every 1 seconds
+    // Refresh leaderboard banner every 10 seconds
     setInterval(updateBanner, 1000);
 
     // Event listeners for category buttons
@@ -270,12 +251,14 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("exit-game-btn").addEventListener("click", () => {
         console.log("Exiting game...");
         switchState("feedback"); // Change the game state to 'feedback'
+        resetFeedback();
     });
 
     // Event listener for returning from feedback
     document.getElementById("return-feedback-btn").addEventListener("click", () => {
         console.log("Returning from feedback...");
         switchState("menu"); // Change the game state to 'menu'
+        resetFeedback();
     });
 
     // Event listener for returning to menu from leaderboard
