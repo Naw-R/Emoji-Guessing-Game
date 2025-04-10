@@ -59,6 +59,7 @@ function switchState(newState) {
             score = 0; // Reset score to zero
             document.getElementById("game-score").innerText = score; // Update score display
             resetFeedback();
+            startEmojiAnimation();
         }
 
         // Handle final score display in Feedback state
@@ -66,6 +67,7 @@ function switchState(newState) {
             console.log("Game over: Stopping timer."); // Debug log
             clearInterval(timerInterval); // Stop the game timer
             resetFeedback();
+            startEmojiAnimation();
 
             
             // Display final score in the Feedback screen

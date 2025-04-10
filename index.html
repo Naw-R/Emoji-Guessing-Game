@@ -16,9 +16,9 @@
 
     <!-- MENU STATE: Category Selection -->
     <div id="menu-screen" class="screen">
-        <div id="username-display" style="margin-bottom: 15px; font-weight: bold;"></div>
+       <h3><div id="username-display" style="margin-bottom: 15px; font-weight: bold;"></div></h3>
         <h1>Guess the Emoji!</h1>
-        <p>Select a category:</p>
+        <h2>Select a category:</h2>
         <div id="category-buttons">
             <!-- Buttons for selecting different emoji categories -->
             <button class="category-btn" data-category="movies">Movies</button>
@@ -33,27 +33,29 @@
     <!-- LOBBY STATE: Confirm Selection & Start Game -->
     <div id="lobby-screen" class="screen hidden">
         <h2>Category Selected:</h2>
-        <p id="selected-category">[Category Name]</p>
+        <h3 id="selected-category">[Category Name]</h3>
         <button id="start-game-btn">Start Game</button>
         <button id="return-menu-btn">Return</button>
-        <div id="timer">⏳ Time: 30s</div>
-        <div id="score">⭐ Score: 0</div>
+        <div id="timer"><h2>⏳ Time: 30s</h2></div>
+        <div id="score"><h2>⭐ Score: 0</h2></div>
     </div>
 
     <!-- IN-GAME STATE: Active Gameplay -->
     <div id="game-screen" class="screen hidden">
         <div id="emoji-display">🧐❓</div>
-        <input type="text" id="user-input" placeholder="Enter your guess">
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Enter your guess">
+            <div id="checkmark" class="hidden">✅</div>
+          </div>
         <button id="submit-btn">Guess</button>
         <button id="hint-btn">Hint</button>
         <button id="exit-game-btn">Exit</button>
-        <div id="scoreboard">Score: <span id="game-score">0</span></div>
-        <div id="game-timer">Timer: <span id="game-time">30</span>s</div>
+        <h3><div id="scoreboard">Score: <span id="game-score">0</span></div></h3>
+        <h3><div id="game-timer">Timer: <span id="game-time">30</span>s</div></h3>
     </div>
 
     <!-- Guesses Icons -->
     <div id="feedback">
-        <div id="checkmark" class="hidden">✅</div>
         <div id="wrong-attempts">
             <span class="x-icon hidden">❌</span>
             <span class="x-icon hidden">❌</span>
@@ -65,8 +67,8 @@
 
     <!-- FEEDBACK SECTION  -->
     <div id="feedback-screen" class="screen hidden">
-        <h3>Game Over</h3>
-        <p id="final-score">Final Score: 0</p>
+        <h1>Game Over</h1>
+        <h2 id="final-score">Final Score: 0</h2>
         <textarea id="feedback-input" placeholder="What do you think about this emoji set?"></textarea>
         <button id="return-feedback-btn">Return to Menu</button> <!-- Updated ID -->
         <button id="submit-feedback-btn">Submit Feedback</button>
@@ -74,7 +76,7 @@
 
     <!-- FULL LEADERBOARD SCREEN -->
     <div id="leaderboard-screen" class="screen hidden">
-        <h2>🏆 Leaderboard</h2>
+        <h1>🏆 Leaderboard</h1>
         <table id="leaderboard-table">
             <thead>
                 <tr><th>Player</th><th>Score</th></tr>
@@ -85,6 +87,8 @@
         </table>
         <button id="return-menu-from-leaderboard">Return to Menu</button>
     </div>
+
+    <canvas></canvas>
 
     <!-- Firebase App (Compatibility) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
