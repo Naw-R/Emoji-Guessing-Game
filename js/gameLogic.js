@@ -43,6 +43,7 @@ function loadCategory(category) {
 
 // Function to start a new game round
 function startGame() {
+    stopEmojiAnimation();
     console.log("Starting new game round"); // Debug log
 
     resetFeedback(); // ✅ Reset all feedback animations/icons

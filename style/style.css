@@ -4,6 +4,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    color: white;
 }
 
 /* Center everything in the viewport */
@@ -12,10 +13,17 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: linear-gradient(135deg, #2d6acb, #388eb6);
-    color: #333;
+    background-color: #000;
 }
 
+/* Style for the background image animation */
+canvas {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
 /* Hide elements that are not currently active */
 .hidden {
     display: none;
@@ -27,17 +35,26 @@ body {
     max-width: 700px;
     padding: 20px;
     text-align: center;
-    background: linear-gradient(135deg, #e1885b, #c8da7d);
+    background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+    opacity: 0.9;
+    backdrop-filter: blur(50px);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
 }
 
 /* Headings style for main titles and subtitles */
-h1,
+h1{
+    font-family: oswald;
+     font-size: 50px;
+     line-height: 1;
+     margin-bottom: 15px;
+     color: white;
+}
 h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #333;
+    font-size: 20px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    color: #ffffff;
     font-weight: 600;
 }
 
@@ -84,19 +101,26 @@ h2 {
 
 /* Style for user input field */
 #user-input {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     font-size: 1rem;
-    border: 2px solid #ccc;
+    border: 2px solid #1a1616;
     border-radius: 6px;
     text-align: center;
     transition: border 0.3s ease;
+    color:#000;
 }
 
 /* Focus state for user input field */
 #user-input:focus {
     border-color: #4a90e2;
     outline: none;
+}
+
+.input-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
 }
 
 /* General button styles */
@@ -113,18 +137,22 @@ button {
 }
 
 /* Specific styles for start and return buttons */
-#start-game-btn, #return-menu-btn, #exit-game-btn {
-    background: #2d2a28;
+#start-game-btn, #return-menu-btn, #exit-game-btn, #submit-btn, #hint-btn, #return-feedback-btn, #submit-feedback-btn, #return-menu-from-leaderboard {
+    background: #1b1a1a;
     color: white;
     font-weight: bold;
 }
 
 /* Hover effect for action buttons */
-#start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover {
+#start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover, #submit-btn:hover, #hint-btn:hover, #return-feedback-btn:hover, #submit-feedback-btn:hover, #return-menu-from-leaderboard:hover {
     background: #000000;
     transform: scale(1.05);
 }
 
+#category-buttons button:hover {
+    background: #000000;
+    transform: scale(1);
+}
 /* Style for feedback input area */
 #feedback-input {
     width: 70%;
@@ -174,7 +202,7 @@ button {
     width: 100%;
     margin-top: 20px;
     border-collapse: collapse;
-    background: #fff;
+    background: #201f1f;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -191,19 +219,19 @@ button {
 
 /* Header styles for leaderboard table */
 #leaderboard-table th {
-    background: #2d6acb;
+    background: #090909;
     color: white;
     font-weight: bold;
 }
 
 /* Zebra striping for table rows */
 #leaderboard-table tr:nth-child(even) {
-    background-color: #f2f2f2;
+    background-color: #464444;
 }
 
 /* Hover effect for table rows */
 #leaderboard-table tr:hover {
-    background-color: #e6f0ff;
+    background-color: #000000;
 }
 
 /* Animations and Graphics*/
@@ -211,17 +239,17 @@ button {
 #checkmark {
     font-size: 2rem;
     position: absolute;
-    top: 41%;
-    left: 74%;
-    transform: translateX(-50%,-50%);
+    right: 10px;
+    transform: translateY(-50%);
     opacity: 0;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 #checkmark.show {
     opacity: 1;
-    transform: translateX(-50%, -50%) scale(1);
+    transform: translateY(-50%) scale(1);
     animation: checkmarkAnimation 0.6s ease forwards;
+    top: 5%;
 }
 
 #wrong-attempts {
@@ -229,7 +257,7 @@ button {
     justify-content: center;
     gap: 10px;
     position: absolute;
-    top: 20%; /* Adjust as needed */
+    top: 20%; 
     left: 30%;
     right: 30%;
     z-index: 10;
@@ -261,6 +289,26 @@ button {
     background: radial-gradient(circle at 20% 20%, #cd8f12, #793a2a);
     z-index: -1;
     opacity: 0.3;
+}
+/* Style for the background */
+.emoji {
+    position: absolute;
+    bottom: 0;
+    font-size: 2rem;
+    opacity: 1;
+    animation: slideUp 3s forwards;
+    z-index: -1;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
 }
 
 /* Keyframes for the checkmark animation */
