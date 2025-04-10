@@ -164,6 +164,7 @@ button {
     resize: vertical; /* Allows users to resize vertically */
     text-align: left; /* Align text to the left */
     transition: border 0.3s ease;
+    color: #000;
 }
 
 /* Focus state for feedback input */
@@ -174,7 +175,7 @@ button {
 
 /* Placeholder style for feedback input */
 #feedback-input::placeholder {
-    color: #aaa;
+    color: lab(0.29% 1.31 0.46);
     font-style: italic;
 }
 
