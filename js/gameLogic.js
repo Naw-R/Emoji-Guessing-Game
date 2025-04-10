@@ -115,9 +115,13 @@ function handleGuess() {
 
 // Function to provide hints
 function showHint() {
-    const hint = currentEmoji.hints; // Get hints for the current emoji
-
-    if (hintUsed < hint.length) { // Check if there are hints available
+    const hints = currentEmoji.hint; // Get the hints for the current emoji
+    // Make sure hints exist and are in array format
+    if (!hints || !Array.isArray(hints) || hints.length === 0) {
+        alert("No hints available for this emoji.");
+        return;
+    }
+    if (hintUsed < hints.length) { // Check if there are hints available
         // Deduct points based on hint number
         if (hintUsed === 0) {
             score -= 1; // First hint costs 1 point
@@ -127,10 +131,11 @@ function showHint() {
             score -= 5; // Third hint costs 5 points
         }
 
-        updateScoreDisplay(); // Update score display after deduction
         score = Math.max(score, 0); // Ensure score doesn't drop below 0
+        updateScoreDisplay(); // Update score display after deduction
+        
 
-        alert(`Hint ${hintUsed + 1}: ${hint[hintUsed]}`); // Show the current hint to the user
+        alert(`Hint ${hintUsed + 1}: ${hints[hintUsed]}`); // Show the current hint to the user
         hintUsed++; // Increment hint counter
     } else {
         alert("No more hints available for this emoji."); // Notify user if no hints are left
