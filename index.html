@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess the Emoji</title>
     <link rel="stylesheet" href="style/style.css">
+    <!-- reCAPTCHA Script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 
 <body>
@@ -70,6 +72,10 @@
         <h1>Game Over</h1>
         <h2 id="final-score">Final Score: 0</h2>
         <textarea id="feedback-input" placeholder="What do you think about this emoji set?"></textarea>
+
+        <!-- reCAPTCHA Widget -->
+        <div class="g-recaptcha" data-sitekey="6LeUhRIrAAAAAFFG7OvoAjVfqGf0VO2EgoIjxln7"></div>
+
         <button id="return-feedback-btn">Return to Menu</button> <!-- Updated ID -->
         <button id="submit-feedback-btn">Submit Feedback</button>
     </div>

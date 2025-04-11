@@ -5,6 +5,7 @@
  * - Feedback form submission
  * - Saving feedback to Firestore
  * - Returning to the menu screen after submission
+ * - reCAPTCHA check (client-only)
  */
 
 function submitFeedback(message, score, category) {
@@ -12,14 +13,15 @@ function submitFeedback(message, score, category) {
 
     const db = firebase.firestore();
     db.collection("feedback").add({
-        name: window.username,
-        category: category,
-        score: score,
+        name: window.username || "Anonymous",
+        category: category || "Unknown",
+        score: score || 0,
         message: message,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
         alert("Thank you for your feedback!");
         document.getElementById("feedback-input").value = "";
+        grecaptcha.reset(); // Reset reCAPTCHA for next time
         switchState("menu");
     }).catch(error => {
         console.error("Error submitting feedback:", error);
@@ -32,11 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (submitBtn) {
         submitBtn.addEventListener("click", () => {
             const feedbackText = document.getElementById("feedback-input").value.trim();
-            if (feedbackText) {
-                submitFeedback(feedbackText, score, currentCategory);
-            } else {
+            const token = grecaptcha.getResponse(); // reCAPTCHA tokeng
+
+            if (!feedbackText) {
                 alert("Please write something before submitting.");
+                return;
             }
+
+            if (!token) {
+                alert("Please complete the reCAPTCHA.");
+                return;
+            }
+
+            // Submit directly to Firestore (without backend verification)
+            submitFeedback(feedbackText, score, currentCategory);
         });
     }
 });
