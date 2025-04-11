@@ -235,6 +235,12 @@ button {
     background-color: #000000;
 }
 
+.recaptcha-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
+  }
+
 /* Animations and Graphics*/
 
 #checkmark {
@@ -344,10 +350,4 @@ button {
     100% {
       transform: translateX(0);
     }
-  }
-
-  .recaptcha-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px; 
   }
