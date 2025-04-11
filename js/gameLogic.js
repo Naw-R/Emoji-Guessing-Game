@@ -71,10 +71,19 @@ function startGame() {
     document.getElementById("user-input").focus(); // Auto-focus input field for user input
 }
 
+// Helper function to normalize answers
+function normalizeAnswer(str) {
+    return str
+        .toLowerCase()
+        .replace(/[-\s]/g, '') // Remove hyphens and spaces
+        .trim();
+}
+
 // Function to handle user guess submission
 function handleGuess() {
-    const userGuess = document.getElementById("user-input").value.trim().toLowerCase(); // Get and format user input
-    const correctAnswer = currentEmoji.title.toLowerCase(); // Get the correct answer in lowercase
+    const userInput = document.getElementById("user-input").value;
+    const userGuess = normalizeAnswer(userInput); // Normalize user input
+    const correctAnswer = normalizeAnswer(currentEmoji.title); // Normalize correct answer
     
     console.log(`User guessed: "${userGuess}". Correct answer: "${correctAnswer}"`); // Debug log user guess and correct answer
     
@@ -110,6 +119,7 @@ function handleGuess() {
             clearUserInput(); // Clear user input for the next guess
         }
     }
+    
 }
 
 // Function to provide hints
