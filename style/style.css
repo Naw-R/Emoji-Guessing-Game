@@ -264,10 +264,9 @@ button {
     justify-content: center;
     gap: 10px;
     position: absolute;
-    top: 20%; 
+    top: 5px; 
     left: 30%;
     right: 30%;
-    z-index: 10;
 }
 
 .x-icon {
@@ -347,8 +346,9 @@ button {
     100% {
         transform: translateX(0);
     }
-
   }
+
+
 
 #toast {
     position: fixed;
