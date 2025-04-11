@@ -101,7 +101,6 @@ function handleGuess() {
         updateScoreDisplay(); // Update score display after deduction
 
         if (incorrectGuesses >= 3) { // Check if the user has made 3 incorrect guesses
-            alert(`Game Over! Final Score: ${score}`); // Notify user of game over
             submitScore(score); // Submit the final score
             clearInterval(timerInterval); // Stop the timer before switching state
             switchState(states.FEEDBACK); // Move to feedback screen
@@ -118,7 +117,7 @@ function showHint() {
     const hints = currentEmoji.hint; // Get the hints for the current emoji
     // Make sure hints exist and are in array format
     if (!hints || !Array.isArray(hints) || hints.length === 0) {
-        alert("No hints available for this emoji.");
+        showToast("No hints available for this emoji.");
         return;
     }
     if (hintUsed < hints.length) { // Check if there are hints available
@@ -135,10 +134,10 @@ function showHint() {
         updateScoreDisplay(); // Update score display after deduction
         
 
-        alert(`Hint ${hintUsed + 1}: ${hints[hintUsed]}`); // Show the current hint to the user
+        showToast(`Hint ${hintUsed + 1}: ${hints[hintUsed]}`); // Show the current hint to the user
         hintUsed++; // Increment hint counter
     } else {
-        alert("No more hints available for this emoji."); // Notify user if no hints are left
+        showToast("No more hints available for this emoji."); // Notify user if no hints are left
     }
 }
 
