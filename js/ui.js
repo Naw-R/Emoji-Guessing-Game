@@ -85,7 +85,7 @@ function showWrongAttempt() {
   
     if (wrongAttempts >= 3) {
       // End game after 3 wrong attempts
-      alert("Game Over! Too many incorrect guesses.");
+      showToast("Game Over! Too many incorrect guesses.");
       submitScore(score);
       switchState(states.FEEDBACK);
     }

@@ -19,13 +19,13 @@ function submitFeedback(message, score, category) {
         message: message,
         timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }).then(() => {
-        alert("Thank you for your feedback!");
+        showToast("Thank you for your feedback!");
         document.getElementById("feedback-input").value = "";
         grecaptcha.reset(); // Reset reCAPTCHA for next time
         switchState("menu");
     }).catch(error => {
         console.error("Error submitting feedback:", error);
-        alert("There was a problem submitting your feedback.");
+        showToast("There was a problem submitting your feedback.");
     });
 }
 
@@ -37,12 +37,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const token = grecaptcha.getResponse(); // reCAPTCHA tokeng
 
             if (!feedbackText) {
-                alert("Please write something before submitting.");
+                showToast("Please write something before submitting.");
                 return;
             }
 
             if (!token) {
-                alert("Please complete the reCAPTCHA.");
+                showToast("Please complete the reCAPTCHA.");
                 return;
             }
 

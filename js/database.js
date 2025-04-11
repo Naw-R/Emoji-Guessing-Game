@@ -1,13 +1,5 @@
 /**
- * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
- * It handles game state management, puzzle initialization, user interactions, and overall game flow.
- * 
- * Functions Overview:
- *   - getRandomEmoji(category): Retrieves a random emoji from the selected category without repetition.
- *   - Tracks used emojis to ensure variety before resetting.
- *   - Exposes emoji data for use in other game components.
- * 
- * This file ensures a fresh gameplay experience by dynamically managing emoji selection.
+ * This file is responsible for managing the database of the Game
  */
 const emojiDatabase = {
     "movies": [
