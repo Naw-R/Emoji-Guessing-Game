@@ -28,7 +28,7 @@ function startTimer() {
         if (timeLeft === 0) {
             clearInterval(timerInterval); // Stop timer
             console.warn("Time's up! Moving to next round."); // Debug log
-            alert(`Time's up! The correct answer was: ${currentEmoji.title}`); // Alert player
+            showToast(`Time's up! The correct answer was: ${currentEmoji.title}`); // Alert player
             switchState(states.FEEDBACK); // Transition to feedback screen
         }
     }, 1000); // Runs every second
