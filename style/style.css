@@ -35,7 +35,7 @@ canvas {
     max-width: 700px;
     padding: 20px;
     text-align: center;
-    background-image: linear-gradient(to right, #134E5E 0%, #71B280  51%, #134E5E  100%);
+    background-image: radial-gradient(circle, #ff7700 0%, #dce949 100%);
     opacity: 0.9;
     backdrop-filter: blur(50px);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
@@ -344,4 +344,10 @@ button {
     100% {
       transform: translateX(0);
     }
+  }
+
+  .recaptcha-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; 
   }
