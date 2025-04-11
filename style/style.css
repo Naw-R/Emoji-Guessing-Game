@@ -262,10 +262,8 @@ button {
     display: flex;
     justify-content: center;
     gap: 10px;
-    position: absolute;
+    position: relative;
     top: 5px; 
-    left: 30%;
-    right: 30%;
 }
 
 .x-icon {
