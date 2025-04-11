@@ -127,7 +127,7 @@ function showHint() {
     const hints = currentEmoji.hint; // Get the hints for the current emoji
     // Make sure hints exist and are in array format
     if (!hints || !Array.isArray(hints) || hints.length === 0) {
-        showToast("No hints available for this emoji.");
+        showHintBubble("No hints available for this emoji.");
         return;
     }
     if (hintUsed < hints.length) { // Check if there are hints available
@@ -144,10 +144,10 @@ function showHint() {
         updateScoreDisplay(); // Update score display after deduction
         
 
-        showToast(`Hint ${hintUsed + 1}: ${hints[hintUsed]}`); // Show the current hint to the user
+        showHintBubble(`Hint ${hintUsed + 1}: ${hints[hintUsed]}`); // Show the current hint to the user
         hintUsed++; // Increment hint counter
     } else {
-        showToast("No more hints available for this emoji."); // Notify user if no hints are left
+        showHintBubble("No more hints available for this emoji."); // Notify user if no hints are left
     }
 }
 

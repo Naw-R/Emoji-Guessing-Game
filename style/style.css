@@ -22,8 +22,8 @@ canvas {
     width: 100%;
     height: 100%;
     z-index: -1;
-  }
-  
+}
+
 /* Hide elements that are not currently active */
 .hidden {
     display: none;
@@ -239,7 +239,7 @@ button {
     display: flex;
     justify-content: center;
     margin-top: 20px; 
-  }
+}
 
 /* Animations and Graphics*/
 
@@ -268,23 +268,19 @@ button {
     left: 30%;
     right: 30%;
     z-index: 10;
-  }
+}
 
-  .x-icon {
+.x-icon {
     font-size: 2rem;
     opacity: 0;
     transform: scale(0.5);
     transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .x-icon.show {
+}
+
+.x-icon.show {
     opacity: 1;
     transform: scale(1);
     animation: shake 0.4s ease;
-  }
-
-.hidden {
-    display: none;
 }
 
 #background-animation {
@@ -297,6 +293,7 @@ button {
     z-index: -1;
     opacity: 0.3;
 }
+
 /* Style for the background */
 .emoji {
     position: absolute;
@@ -323,52 +320,85 @@ button {
     0% {
         transform: scale(0);
         opacity: 0;
-      }
-      50% {
+    }
+    50% {
         transform: scale(1.2);  /* Slightly bigger */
         opacity: 1;
-      }
-      100% {
+    }
+    100% {
         transform: scale(1);  /* Back to normal size */
         opacity: 1;
-      }
-  }
+    }
+}
 
 @keyframes shake {
     0% {
-      transform: translateX(0);
+        transform: translateX(0);
     }
     25% {
-      transform: translateX(-5px);
+        transform: translateX(-5px);
     }
     50% {
-      transform: translateX(5px);
+        transform: translateX(5px);
     }
     75% {
-      transform: translateX(-5px);
+        transform: translateX(-5px);
     }
     100% {
-      transform: translateX(0);
+        transform: translateX(0);
     }
+
   }
 
 #toast {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: rgba(0, 0, 0, 0.85);
-      color: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      z-index: 2000;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-  }
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    z-index: 2000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
 
   #toast.show {
       opacity: 1;
       transform: translateY(0);
   }
+
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Hint bubble styles */
+#hint-bubble {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 80%;
+    background: #fff9c4;
+    color: #444;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 2px solid #ffcc00;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#hint-bubble.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-10px);
+}

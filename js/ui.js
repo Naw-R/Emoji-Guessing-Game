@@ -110,6 +110,20 @@ function showWrongAttempt() {
      wrongAttempts = 0;
 }
 
+function showHintBubble(text) {
+  const bubble = document.getElementById("hint-bubble");
+  if (!bubble) return;
+
+  bubble.textContent = text;
+  bubble.classList.add("show");
+  bubble.classList.remove("hidden");
+
+  setTimeout(() => {
+    bubble.classList.remove("show");
+    bubble.classList.add("hidden");
+  }, 3000);
+}
+
 let isAnimating = true; // Controls whether emojis are animating
 
 //Background Emoji Animation
@@ -256,9 +270,6 @@ function render() {
   });
 }
 
-
-
-
 // Expose functions globally for use in other scripts
 window.updateEmojiDisplay = updateEmojiDisplay;
 window.updateScoreDisplay = updateScoreDisplay;
@@ -266,3 +277,4 @@ window.clearUserInput = clearUserInput;
 window.showCheckmark = showCheckmark;
 window.showWrongAttempt = showWrongAttempt;
 window.resetFeedback = resetFeedback;
+window.showHintBubble = showHintBubble;
