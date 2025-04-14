@@ -2,7 +2,6 @@
 
 **Final Project – CART 263**  
 **By Rowan Nasser & Maia Arrais Mateo**
-[**View this project online**](https://naw-r.github.io/Emoji-Guessing-Game/)
 
 An interactive browser-based guessing game built with JavaScript, HTML, and CSS, featuring Firebase and Google ReCaptcha integration. Players are given emoji clues and must guess the correct phrase (e.g., movie title, brand, book, etc.) before time runs out. This game is structured into modular JavaScript files, each responsible for a different part of the experience:
 
