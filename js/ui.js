@@ -12,29 +12,39 @@
 
 // ui.js - Handles UI updates like emoji display, score, and input field.
 
-// Function to update the emoji display on screen
+/**
+ * Function to update the emoji display on screen
+ * Updates the displayed emoji in the UI.
+ */
 function updateEmojiDisplay(emoji) {
     console.log(`Updating emoji display: ${emoji}`); // Debug log
     document.getElementById("emoji-display").innerText = emoji; // Show current emoji
 }
 
-// Function to update the score display
+/**
+ * Function to update the score display
+ * Updates the score display in the UI with the current score.
+ */
 function updateScoreDisplay() {
     console.log(`Updating score display: ${score}`); // Debug log
     document.getElementById("game-score").innerText = score; // Update score in UI
 }
 
-// Function to clear the user input field
+/**
+ * Function to clear the user input field
+ * Clears the user input field in the UI.
+ */
 function clearUserInput() {
     console.log("Clearing user input field."); // Debug log
     document.getElementById("user-input").value = ""; // Reset input field
-    
 }
 
+let wrongAttempts = 0; // Counter for wrong attempts
 
-
-let wrongAttempts = 0;
-
+/**
+ * Function to show a checkmark for correct attempts
+ * Displays a checkmark on the screen for correct guesses.
+ */
 function showCheckmark() {
     let check = document.getElementById("checkmark");
     
@@ -65,14 +75,17 @@ function showCheckmark() {
     check.classList.add("show");
     check.classList.remove("hidden");
 
+    // Hide the checkmark after a delay
     setTimeout(() => {
         check.classList.remove("show");
         check.classList.add("hidden");
     }, 1500);
 }
 
-
-// Show X for wrong attempt
+/**
+ * Function to show X for wrong attempts
+ * Increments the wrong attempt counter and displays an X icon for each wrong attempt.
+ */
 function showWrongAttempt() {
     wrongAttempts++;
   
@@ -89,9 +102,13 @@ function showWrongAttempt() {
       submitScore(score);
       switchState(states.FEEDBACK);
     }
-  }
-
-  function resetFeedback() {
+}
+ 
+/**
+ * Function to reset feedback visuals
+ * Resets the checkmark and all X icons, and the wrong attempts counter.
+ */
+function resetFeedback() {
      // Reset checkmark
      const checkmark = document.getElementById("checkmark");
      if (checkmark) {
@@ -110,6 +127,10 @@ function showWrongAttempt() {
      wrongAttempts = 0;
 }
 
+/**
+ * Function to show a hint bubble
+ * Displays a hint bubble with the provided text.
+ */
 function showHintBubble(text) {
   const bubble = document.getElementById("hint-bubble");
   if (!bubble) return;
@@ -118,6 +139,7 @@ function showHintBubble(text) {
   bubble.classList.add("show");
   bubble.classList.remove("hidden");
 
+  // Hide the hint bubble after a delay
   setTimeout(() => {
     bubble.classList.remove("show");
     bubble.classList.add("hidden");
@@ -126,10 +148,14 @@ function showHintBubble(text) {
 
 let isAnimating = true; // Controls whether emojis are animating
 
-//Background Emoji Animation
+// Background Emoji Animation
 const emojis = ["😀", "😂", "😍", "🥳", "😎", "🤖", "👻", "🎉", "🌟", "🍕", "❤️", "🔥", "🎉"];
 const animationDuration = 3000; // Duration of the animation in milliseconds
 
+/**
+ * Function to create a new emoji
+ * Creates a new emoji element and starts its animation.
+ */
 function createEmoji() {
     if (!isAnimating) return; // Stop creating emojis if animation is disabled
 
@@ -148,6 +174,10 @@ function createEmoji() {
     requestAnimationFrame(() => animateEmoji(emoji));
 }
 
+/**
+ * Function to animate the emoji
+ * Animates the emoji moving upwards and fading out.
+ */
 function animateEmoji(emoji) {
     const startTime = performance.now();
     
@@ -173,100 +203,135 @@ function animateEmoji(emoji) {
 // Create emojis at intervals
 setInterval(createEmoji, 500); // Create a new emoji every 500 milliseconds
 
+/**
+ * Function to start emoji animation
+ * Enables emoji animation.
+ */
 function startEmojiAnimation() {
     isAnimating = true;
 }
 
+/**
+ * Function to stop emoji animation
+ * Disables emoji animation.
+ */
 function stopEmojiAnimation() {
     isAnimating = false;
 }
 
+// Background stars animation setup
+const STAR_COLOR = '#fff'; // Color of the stars
+const STAR_SIZE = 3; // Size of the stars
+const STAR_MIN_SCALE = 0.2; // Minimum scale of the stars
+const STAR_COUNT = (window.innerWidth + window.innerHeight) / 6; // Number of stars based on window size
 
-// background stars background animation
-const STAR_COLOR = '#fff';
-const STAR_SIZE = 3;
-const STAR_MIN_SCALE = 0.2;
-const STAR_COUNT = (window.innerWidth + window.innerHeight) / 6;
+const canvas = document.querySelector('canvas'), // Select the canvas element
+      context = canvas.getContext('2d'); // Get 2D drawing context
 
-const canvas = document.querySelector('canvas'),
-      context = canvas.getContext('2d');
+let scale = 1, // Scale factor for the canvas
+    width, // Width of the canvas
+    height; // Height of the canvas
 
-let scale = 1,
-    width,
-    height;
+let stars = []; // Array to hold star objects
 
-let stars = [];
-
+// Initialize the star field
 generate();
 resize();
-step();
+step(); // Start the animation loop
 
-window.onresize = resize;
+window.onresize = resize; // Adjust canvas on window resize
 
+/**
+ * Function to generate stars
+ * Creates star objects and adds them to the stars array.
+ */
 function generate() {
   for (let i = 0; i < STAR_COUNT; i++) {
     stars.push({
       x: 0,
       y: 0,
-      z: STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE)
+      z: STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE) // Random depth for the star
     });
   }
 }
 
+/**
+ * Function to place a star at a random location canvas.
+ */
 function placeStar(star) {
   star.x = Math.random() * width;
   star.y = Math.random() * height;
-  star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
+  star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE); // Random depth for the star
 }
 
+/**
+ * Function to recycle a star when it goes out of view
+ * Resets the star to a random position and depth.
+ */
 function recycleStar(star) {
   star.x = Math.random() * width;
   star.y = Math.random() * height;
-  star.z = STAR_MIN_SCALE;
+  star.z = STAR_MIN_SCALE; // Reset depth to minimum
 }
 
+/**
+ * Function to resize the canvas
+ * Adjusts the canvas size and repositions stars based on the new dimensions.
+ */
 function resize() {
-  scale = window.devicePixelRatio || 1;
-  width = window.innerWidth * scale;
-  height = window.innerHeight * scale;
-  canvas.width = width;
-  canvas.height = height;
-  stars.forEach(placeStar);
+  scale = window.devicePixelRatio || 1; // Get the scale factor
+  width = window.innerWidth * scale; // Set width based on window size
+  height = window.innerHeight * scale; // Set height based on window size
+  canvas.width = width; // Set canvas width
+  canvas.height = height; // Set canvas height
+  stars.forEach(placeStar); // Place stars in new positions
 }
 
+/**
+ * Function to animate the stars
+ * Clears the canvas, updates star positions, and renders them.
+ */
 function step() {
-  context.clearRect(0, 0, width, height);
-  update();
-  render();
-  requestAnimationFrame(step);
+  context.clearRect(0, 0, width, height); // Clear the canvas
+  update(); // Update star positions
+  render(); // Render stars
+  requestAnimationFrame(step); // Loop the animation
 }
 
+/**
+ * Function to update star positions
+ * Updates the depth of each star to create a zooming effect.
+ */
 function update() {
   stars.forEach((star) => {
     // Move the stars toward the viewer
     star.z -= 0.0010;
 
     if (star.z <= 0) {
-    star.z = 1; // Reset the depth to the farthest point
+      star.z = 1; // Reset the depth to the farthest point
     }
   });
 }
 
+/**
+ * Function to render stars on the canvas
+ * Draws the stars on the canvas based on their current positions and depths.
+ */
 function render() {
   stars.forEach((star) => {
-    const x = (star.x - width / 2) * (1 / star.z) + width / 2;
-    const y = (star.y - height / 2) * (1 / star.z) + height / 2;
-    const size = STAR_SIZE * star.z * scale;
+    const x = (star.x - width / 2) * (1 / star.z) + width / 2; // Calculate x position
+    const y = (star.y - height / 2) * (1 / star.z) + height / 2; // Calculate y position
+    const size = STAR_SIZE * star.z * scale; // Calculate size based on depth
 
     context.beginPath();
     context.lineCap = 'round';
-    context.lineWidth = size;
-    context.globalAlpha = 0.8;
-    context.strokeStyle = STAR_COLOR;
+    context.lineWidth = size; // Set line width based on size
+    context.globalAlpha = 0.8; // Set opacity
+    context.strokeStyle = STAR_COLOR; // Set color
 
-    context.moveTo(x, y);
-    context.lineTo(x, y + size);
-    context.stroke();
+    context.moveTo(x, y); // Move to star position
+    context.lineTo(x, y + size); // Draw line for star
+    context.stroke(); // Render the star
   });
 }
 

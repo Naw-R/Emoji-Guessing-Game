@@ -1,16 +1,32 @@
 /**
- * Main Game Script
+ * script.js
+ * ----------
+ * Main Game Script for the Emoji Word Guessing Game 
  * 
  * Handles:
- * - Initializing player usernames
- * - Setting up event listeners for game states and UI buttons
- * - Submitting and updating leaderboard scores in Firebase
- * - Submitting player feedback to Firebase
- * - Displaying top scores in the banner and full leaderboard view
+ * - Username setup and display
+ * - Game state event listeners and transitions
+ * - Firebase leaderboard and feedback submissions
+ * - Real-time banner update for top scores
  * 
- * Firebase is initialized separately via a script tag in index.html (firebaseInit.js)
+ * Functions Overview:
+ * - initUsername(): Initializes and displays a unique player username.
+ * - submitScore(score): Saves high scores to Firebase leaderboard.
+ * - updateBanner(): Updates the banner with top 3 leaderboard scores.
+ * - showFullLeaderboard(): Displays full leaderboard with top 10 scores.
+ * - submitFeedback(message, score, category): Sends player feedback to Firebase.
+ * - showToast(message): Creates a brief toast popup for messages.
+ * 
+ * Uses:
+ * - Firebase Firestore (initialized in firebaseInit.js)
+ * - DOM event listeners and localStorage
  */
 
+ /**
+  * Initializes player username
+  * If not found in localStorage, generates a random one and stores it.
+  * Updates the welcome banner with the username.
+  */
 function initUsername() {
     // Retrieve stored username from local storage or create a default one
     let storedName = localStorage.getItem("username");
@@ -28,72 +44,10 @@ function initUsername() {
     }
 }
 
-// Set up event listeners and initialize game state once the DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    initUsername(); // Initialize the username
-    updateBanner(); // Update the leaderboard banner
-    // Refresh leaderboard banner every 1 seconds
-    setInterval(updateBanner, 1000);
-
-    // Event listeners for category buttons
-    document.querySelectorAll(".category-btn").forEach(button => {
-        button.addEventListener("click", () => {
-            const category = button.getAttribute("data-category"); // Get category from button
-            loadCategory(category); // Load the selected category
-        });
-    });
-
-    // Event listener for starting the game
-    document.getElementById("start-game-btn").addEventListener("click", () => {
-        console.log("Game started!");
-        switchState("game"); // Change the game state to 'game'
-        if (typeof startGame === "function") {
-            startGame(); // Start the game if the function is defined
-        } else {
-            console.warn("startGame() is not defined");
-        }
-    });
-
-    // Event listener for returning to menu
-    document.getElementById("return-menu-btn").addEventListener("click", () => {
-        console.log("Returning to menu...");
-        switchState("menu"); // Change the game state to 'menu'
-    });
-
-    // Event listener for exiting the game
-    document.getElementById("exit-game-btn").addEventListener("click", () => {
-        console.log("Exiting game...");
-        switchState("feedback"); // Change the game state to 'feedback'
-    });
-
-    // Event listener for returning from feedback
-    document.getElementById("return-feedback-btn").addEventListener("click", () => {
-        console.log("Returning from feedback...");
-        switchState("menu"); // Change the game state to 'menu'
-    });
-
-    // Event listener for returning to menu from leaderboard
-    document.getElementById("return-menu-from-leaderboard").addEventListener("click", () => {
-        console.log("Returning to menu from leaderboard...");
-        switchState("menu"); // Change the game state to 'menu'
-    });
-
-    // Event listener for leaderboard banner click
-    const leaderboardBanner = document.getElementById("leaderboard-banner");
-    if (leaderboardBanner) {
-        leaderboardBanner.addEventListener("click", () => {
-            if (typeof currentState !== "undefined" && currentState === "menu") {
-                switchState("leaderboard"); // Change state to 'leaderboard'
-                showFullLeaderboard(); // Show full leaderboard
-            } else {
-                showToast("Leaderboard can be viewed fully from the main menu!"); // Alert if not in menu
-            }
-        });
-    }
-
-});
-
-// Submit score to Firebase leaderboard, only if it's the user's best score
+/**
+ * Submits the user's score to Firebase only if it's their personal best.
+ * Updates existing record or creates a new one.
+ */
 async function submitScore(score) {
     if (!firebase || !firebase.firestore) {
         console.error("Firebase not initialized.");
@@ -136,7 +90,10 @@ async function submitScore(score) {
     }
 }
 
-// Fetch top 3 scores and update leaderboard banner
+/**
+ * Fetches top 3 scores from Firebase and displays them in the banner.
+ * Runs every second via setInterval for real-time updates.
+ */
 async function updateBanner() {
     // Check if Firebase is initialized
     if (!firebase || !firebase.firestore) {
@@ -166,7 +123,9 @@ async function updateBanner() {
     }
 }
 
-// Load top 10 scores into leaderboard screen
+/**
+ * Loads the top 10 scores from Firebase and populates the leaderboard table.
+ */
 async function showFullLeaderboard() {
     // Check if Firebase is initialized
     if (!firebase || !firebase.firestore) return; // Exit if Firebase is not set up
@@ -194,7 +153,10 @@ async function showFullLeaderboard() {
     }
 }
 
-// Submit player feedback to Firestore
+/**
+ * Submits player feedback with score and category to Firebase.
+ * Provides UI toast confirmation or error.
+ */
 function submitFeedback(message, score, category) {
     if (!firebase || !firebase.firestore) return;
 
@@ -214,6 +176,9 @@ function submitFeedback(message, score, category) {
     });
 }
 
+/**
+ * Displays a temporary message banner ("toast") at the bottom of the screen.
+ */
 function showToast(message) {
     const toast = document.createElement('div');
     toast.id = 'toast';

@@ -1,20 +1,25 @@
 /**
- * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
- * It handles game state management, puzzle initialization, user interactions, and overall game flow.
+ * gameLogic.js
+ * ------------
+ * Manages the core gameplay logic of the Emoji Word Guessing Game.
+ * 
+ * Handles: 
+ * - Category loading and state transitions   
+ * - Game initialization, emoji selection, and scoring
+ * - Guess validation and hint display with scoring penalties 
+ * - DOM interaction for emoji display, score updates, and input handling      
  * 
  * Functions Overview:
- *   - loadCategory(category): Loads and sets the selected emoji category, then transitions to the Lobby state.
- *   - startGame(): Initializes a new round, selects a random emoji, and resets necessary states.
- *   - handleGuess(): Processes user input, updates the score, and determines game progression.
- *   - showHint(): Provides hints while deducting points based on hint usage.
+ * - loadCategory(category): Loads category and transitions to Lobby screen.
+ * - startGame(): Starts a new round with a random emoji. 
+ * - normalizeAnswer(): Cleans and standardizes guesses for comparison.
+ * - handleGuess(): Processes user guesses, updates score, handles feedback or round continuation.
+ * - showHint(): Displays hints with increasing point penalties. 
  * 
- * This file ensures smooth gameplay mechanics by handling game logic dynamically.
- * 
- * Key Variables:
- *   - score: Tracks the player's current score.
- *   - currentEmoji: Holds the emoji object currently being guessed.
- *   - hintUsed: Counts the number of hints the player has used.
- *   - incorrectGuesses: Counts the number of incorrect guesses made by the player.
+ * Uses:
+ * - DOM manipulation  
+ * - Game state switching via switchState() 
+ * - Timer functions (resetTimer, clearInterval) 
  */
 
 //global variables
@@ -23,7 +28,10 @@ let currentEmoji = null; // Current emoji object for the round
 let hintUsed = 0; // Track the number of hints the user has used
 let incorrectGuesses = 0; // Track incorrect guesses
 
-// Function to load the selected category
+/**
+ * Loads the selected emoji category, stores it globally, updates the UI,
+ * and transitions to the Lobby screen if switchState is available.
+ */
 function loadCategory(category) {
     console.log(`loadCategory() called with category: ${category}`); // Debug log
 
@@ -41,7 +49,12 @@ function loadCategory(category) {
     }
 }
 
-// Function to start a new game round
+/**
+ * Starts a new game round:
+ * - Resets feedback, hints, and input
+ * - Selects a new emoji
+ * - Resets counters and restarts the timer
+ */
 function startGame() {
     stopEmojiAnimation();
     console.log("Starting new game round"); // Debug log
@@ -71,7 +84,10 @@ function startGame() {
     document.getElementById("user-input").focus(); // Auto-focus input field for user input
 }
 
-// Helper function to normalize answers
+/**
+ * Helper function that converts a string to lowercase,
+ * removes hyphens and spaces, and trims extra whitespace.
+ */
 function normalizeAnswer(str) {
     return str
         .toLowerCase()
@@ -79,7 +95,12 @@ function normalizeAnswer(str) {
         .trim();
 }
 
-// Function to handle user guess submission
+/**
+ * Handles the user's guess:
+ * - Normalizes and compares input with emoji title
+ * - Updates score and displays feedback
+ * - Ends game if 3 incorrect guesses are made
+ */
 function handleGuess() {
     const userInput = document.getElementById("user-input").value;
     const userGuess = normalizeAnswer(userInput); // Normalize user input
@@ -119,10 +140,13 @@ function handleGuess() {
             clearUserInput(); // Clear user input for the next guess
         }
     }
-    
 }
 
-// Function to provide hints
+/**
+ * Displays a hint for the current emoji:
+ * - Deducts increasing points based on how many hints were used
+ * - Displays hint or notifies when no hints are left
+ */
 function showHint() {
     const hints = currentEmoji.hint; // Get the hints for the current emoji
     // Make sure hints exist and are in array format

@@ -1,4 +1,5 @@
-/* Reset default styles */
+/* Section: Reset Styles */
+/* Reset default styles to ensure consistent rendering across browsers */
 * {
     margin: 0;
     padding: 0;
@@ -7,7 +8,8 @@
     color: white;
 }
 
-/* Center everything in the viewport */
+/* Section: Body Styling */
+/* Center everything in the viewport for a clean layout */
 body {
     display: flex;
     justify-content: center;
@@ -16,7 +18,8 @@ body {
     background-color: #000;
 }
 
-/* Style for the background image animation */
+/* Section: Background Animation */
+/* Style for the background image animation using a canvas element */
 canvas {
     position: fixed;
     width: 100%;
@@ -24,12 +27,14 @@ canvas {
     z-index: -1;
 }
 
-/* Hide elements that are not currently active */
+/* Section: Hidden Elements */
+/* Class to hide elements that are not currently active */
 .hidden {
     display: none;
 }
 
-/* Style for screen containers that hold different game sections */
+/* Section: Screen Containers */
+/* Style for containers that hold different game sections */
 .screen {
     width: 100%;
     max-width: 700px;
@@ -41,14 +46,16 @@ canvas {
     border-radius: 12px;
 }
 
+/* Section: Headings */
 /* Headings style for main titles and subtitles */
-h1{
+h1 {
     font-family: oswald;
-     font-size: 50px;
-     line-height: 1;
-     margin-bottom: 15px;
-     color: white;
+    font-size: 50px;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: white;
 }
+
 h2 {
     font-size: 20px;
     margin-bottom: 5px;
@@ -57,6 +64,7 @@ h2 {
     font-weight: 600;
 }
 
+/* Section: Category Selection */
 /* Layout for category selection buttons */
 #category-buttons {
     display: flex;
@@ -64,6 +72,7 @@ h2 {
     gap: 10px;
 }
 
+/* Section: Category Button Styling */
 /* Style for individual category buttons */
 .category-btn {
     width: 70%;
@@ -78,6 +87,7 @@ h2 {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
+/* Section: Emoji Display */
 /* Display style for the emoji being guessed */
 #emoji-display {
     font-size: 3rem;
@@ -85,11 +95,13 @@ h2 {
     transition: transform 0.3s ease;
 }
 
+/* Section: Emoji Hover Effect */
 /* Scale up the emoji on hover for emphasis */
 #emoji-display:hover {
     transform: scale(1.5);
 }
 
+/* Section: Game Score Display */
 /* Style for displaying the current game score */
 #game-score {
     font-size: 1.5rem;
@@ -98,6 +110,7 @@ h2 {
     margin: 10px 0;
 }
 
+/* Section: User Input Field */
 /* Style for user input field */
 #user-input {
     width: 100%;
@@ -107,22 +120,26 @@ h2 {
     border-radius: 6px;
     text-align: center;
     transition: border 0.3s ease;
-    color:#000;
+    color: #000;
 }
 
+/* Section: User Input Focus State */
 /* Focus state for user input field */
 #user-input:focus {
     border-color: #4a90e2;
     outline: none;
 }
 
+/* Section: Input Container */
+/* Container for input elements */
 .input-container {
     position: relative;
     width: 80%;
     margin: 0 auto;
 }
 
-/* General button styles */
+/* Section: General Button Styles */
+/* General button styles for consistent appearance */
 button {
     padding: 12px;
     margin-top: 15px;
@@ -135,6 +152,7 @@ button {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
+/* Section: Specific Button Styles */
 /* Specific styles for start and return buttons */
 #start-game-btn, #return-menu-btn, #exit-game-btn, #submit-btn, #hint-btn, #return-feedback-btn, #submit-feedback-btn, #return-menu-from-leaderboard {
     background: #1b1a1a;
@@ -142,16 +160,21 @@ button {
     font-weight: bold;
 }
 
+/* Section: Button Hover Effects */
 /* Hover effect for action buttons */
 #start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover, #submit-btn:hover, #hint-btn:hover, #return-feedback-btn:hover, #submit-feedback-btn:hover, #return-menu-from-leaderboard:hover {
     background: #000000;
     transform: scale(1.05);
 }
 
+/* Section: Category Button Hover Effects */
+/* Hover effect for category buttons */
 #category-buttons button:hover {
     background: #000000;
     transform: scale(1);
 }
+
+/* Section: Feedback Input Area */
 /* Style for feedback input area */
 #feedback-input {
     width: 70%;
@@ -166,18 +189,21 @@ button {
     color: #000;
 }
 
+/* Section: Feedback Input Focus State */
 /* Focus state for feedback input */
 #feedback-input:focus {
     border-color: #4a90e2;
     outline: none;
 }
 
+/* Section: Feedback Input Placeholder */
 /* Placeholder style for feedback input */
 #feedback-input::placeholder {
     color: lab(0.29% 1.31 0.46);
     font-style: italic;
 }
 
+/* Section: Leaderboard Banner */
 /* Banner style for the leaderboard */
 .leaderboard-banner {
     position: fixed;
@@ -192,11 +218,13 @@ button {
     cursor: pointer;
 }
 
+/* Section: Leaderboard Banner Hover Effect */
 /* Hover effect for leaderboard banner */
 .leaderboard-banner:hover {
     background: #444;
 }
 
+/* Section: Leaderboard Table */
 /* Style for the leaderboard table */
 #leaderboard-table {
     width: 100%;
@@ -208,6 +236,7 @@ button {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Section: Leaderboard Table Header and Cell Styles */
 /* Table header and cell styles */
 #leaderboard-table th,
 #leaderboard-table td {
@@ -217,6 +246,7 @@ button {
     font-size: 1rem;
 }
 
+/* Section: Leaderboard Table Header Styles */
 /* Header styles for leaderboard table */
 #leaderboard-table th {
     background: #090909;
@@ -224,24 +254,28 @@ button {
     font-weight: bold;
 }
 
+/* Section: Zebra Striping for Table Rows */
 /* Zebra striping for table rows */
 #leaderboard-table tr:nth-child(even) {
     background-color: #464444;
 }
 
+/* Section: Table Row Hover Effects */
 /* Hover effect for table rows */
 #leaderboard-table tr:hover {
     background-color: #000000;
 }
 
+/* Section: Recaptcha Container */
+/* Container for recaptcha element */
 .recaptcha-container {
     display: flex;
     justify-content: center;
     margin-top: 20px; 
 }
 
-/* Animations and Graphics*/
-
+/* Section: Animations and Graphics */
+/* Style for the checkmark animation */
 #checkmark {
     font-size: 2rem;
     position: absolute;
@@ -251,6 +285,8 @@ button {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Section: Checkmark Show State */
+/* Show state for checkmark with animation */
 #checkmark.show {
     opacity: 1;
     transform: translateY(-50%) scale(1);
@@ -258,6 +294,8 @@ button {
     top: 5%;
 }
 
+/* Section: Wrong Attempts Display */
+/* Display style for wrong attempts */
 #wrong-attempts {
     display: flex;
     justify-content: center;
@@ -266,6 +304,8 @@ button {
     top: 5px; 
 }
 
+/* Section: X Icon Styling */
+/* Style for the x icon representing wrong attempts */
 .x-icon {
     font-size: 2rem;
     opacity: 0;
@@ -273,12 +313,16 @@ button {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Section: X Icon Show State */
+/* Show state for x icon with animation */
 .x-icon.show {
     opacity: 1;
     transform: scale(1);
     animation: shake 0.4s ease;
 }
 
+/* Section: Background Animation */
+/* Style for the background animation */
 #background-animation {
     position: fixed;
     top: 0;
@@ -290,7 +334,8 @@ button {
     opacity: 0.3;
 }
 
-/* Style for the background */
+/* Section: Emoji Style */
+/* Style for the emoji in the game */
 .emoji {
     position: absolute;
     bottom: 0;
@@ -300,6 +345,8 @@ button {
     z-index: -1;
 }
 
+/* Section: Slide Up Animation */
+/* Keyframes for the slide up animation */
 @keyframes slideUp {
     0% {
         transform: translateY(0);
@@ -311,6 +358,7 @@ button {
     }
 }
 
+/* Section: Checkmark Animation */
 /* Keyframes for the checkmark animation */
 @keyframes checkmarkAnimation {
     0% {
@@ -327,6 +375,8 @@ button {
     }
 }
 
+/* Section: Shake Animation */
+/* Keyframes for the shake animation */
 @keyframes shake {
     0% {
         transform: translateX(0);
@@ -343,10 +393,10 @@ button {
     100% {
         transform: translateX(0);
     }
-  }
+}
 
-
-
+/* Section: Toast Notification */
+/* Style for the toast notification */
 #toast {
     position: fixed;
     bottom: 30px;
@@ -363,17 +413,15 @@ button {
     pointer-events: none;
 }
 
-  #toast.show {
-      opacity: 1;
-      transform: translateY(0);
-  }
-
+/* Section: Toast Show State */
+/* Show state for toast notification */
 #toast.show {
     opacity: 1;
     transform: translateY(0);
 }
 
-/* Hint bubble styles */
+/* Section: Hint Bubble */
+/* Styles for the hint bubble that provides hints to the user */
 #hint-bubble {
     position: relative;
     top: 10px;
@@ -395,6 +443,8 @@ button {
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+/* Section: Hint Bubble Show State */
+/* Show state for hint bubble with animation */
 #hint-bubble.show {
     opacity: 1;
     transform: translateX(-50%) translateY(-10px);

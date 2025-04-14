@@ -1,14 +1,27 @@
 /**
- * Feedback Script
+ * feedback.js
+ * ------------
+ * Manages the feedback functionality in the Emoji Word Guessing Game.
  * 
  * Handles:
- * - Feedback form submission
- * - Saving feedback to Firestore
- * - Returning to the menu screen after submission
- * - reCAPTCHA check (client-only)
+ * - Feedback form submission via DOM interaction
+ * - reCAPTCHA client-side validation
+ * - Storing feedback in Firestore
+ * - Redirecting the user back to the menu after submission
+ * 
+ * Uses:
+ * - Firebase Firestore
+ * - grecaptcha for client-side bot verification
+ * - DOM event listeners
  */
 
+/**
+ * submitFeedback(message, score, category)
+ * Saves user feedback to Firestore with name, score, message, and timestamp.
+ * Displays a toast and resets the form upon success, or shows error message on failure.
+ */
 function submitFeedback(message, score, category) {
+
     if (!firebase || !firebase.firestore) return;
 
     const db = firebase.firestore();
@@ -29,12 +42,16 @@ function submitFeedback(message, score, category) {
     });
 }
 
+/**
+ * Sets up the event listener for the feedback form submit button.
+ * Validates input and reCAPTCHA before submitting to Firestore.
+ */
 document.addEventListener("DOMContentLoaded", () => {
     const submitBtn = document.getElementById("submit-feedback-btn");
     if (submitBtn) {
         submitBtn.addEventListener("click", () => {
             const feedbackText = document.getElementById("feedback-input").value.trim();
-            const token = grecaptcha.getResponse(); // reCAPTCHA tokeng
+            const token = grecaptcha.getResponse(); // reCAPTCHA token
 
             if (!feedbackText) {
                 showToast("Please write something before submitting.");
@@ -46,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Submit directly to Firestore (without backend verification)
+            // Submit directly to Firestore
             submitFeedback(feedbackText, score, currentCategory);
         });
     }

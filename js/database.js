@@ -1,5 +1,16 @@
 /**
- * This file is responsible for managing the database of the Game
+ * database.js
+ * ------------
+ * Stores the emoji data for each category in the Emoji Word Guessing Game.
+ *  
+ * This file contains:
+ * - A global object `emojiDatabase` categorized by theme (movies, songs, books, etc.)
+ * - Each category includes an array of emoji puzzles, each with:
+ *   - emoji: the emoji clue
+ *   - title: the correct answer
+ *   - hint: an array of 3 hints
+ * 
+ * Used by game logic to fetch emojis and validate answers.
  */
 const emojiDatabase = {
     "movies": [
