@@ -1,40 +1,59 @@
 /**
  * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
  * It handles game state management, puzzle initialization, user interactions, and overall game flow.
+ * Authors: Maia and Rowan
  * 
  * Functions Overview:
- *   - updateEmojiDisplay(emoji): Updates the emoji display on the screen.
- *   - updateScoreDisplay(): Updates the score display with the current score.
- *   - clearUserInput(): Clears the user input field.
+ * - updateEmojiDisplay(emoji): Updates the displayed emoji.
+ * - updateScoreDisplay(): Displays the current score.
+ * - clearUserInput(): Clears the input field.
+ * - showCheckmark(): Animates the green checkmark for correct answers.
+ * - showWrongAttempt(): Displays X icons and handles game over after 3 wrong tries.
+ * - resetFeedback(): Resets feedback visuals (✅ and ❌).
+ * - showHintBubble(text): Displays a hint bubble on screen.
+ * - createEmoji(): Spawns animated emojis for background decoration.
+ * - startEmojiAnimation(): Enables animated emoji generation.
+ * - stopEmojiAnimation(): Disables animated emoji generation.
+ * - Background starfield canvas animation (generate, update, render).
  * 
  * This file ensures smooth user interaction by updating the UI dynamically during gameplay.
  */
 
-// ui.js - Handles UI updates like emoji display, score, and input field.
+// ===== UI Update Functions ===== //
 
-// Function to update the emoji display on screen
+/**
+ * Displays the current emoji on screen
+ */
 function updateEmojiDisplay(emoji) {
     console.log(`Updating emoji display: ${emoji}`); // Debug log
     document.getElementById("emoji-display").innerText = emoji; // Show current emoji
 }
 
-// Function to update the score display
+/**
+ * Updates the score shown on the screen
+ */
 function updateScoreDisplay() {
     console.log(`Updating score display: ${score}`); // Debug log
     document.getElementById("game-score").innerText = score; // Update score in UI
 }
 
-// Function to clear the user input field
+/**
+ * Clears the user input field
+ */
 function clearUserInput() {
     console.log("Clearing user input field."); // Debug log
     document.getElementById("user-input").value = ""; // Reset input field
     
 }
 
+// ===== Feedback Display ===== //
 
 
 let wrongAttempts = 0;
 
+/**
+ * Shows a checkmark animation when the user guesses correctly
+ */
 function showCheckmark() {
     let check = document.getElementById("checkmark");
     
@@ -72,7 +91,9 @@ function showCheckmark() {
 }
 
 
-// Show X for wrong attempt
+/**
+ * Shows a red X for each incorrect guess and ends game after 3 mistakes
+ */
 function showWrongAttempt() {
     wrongAttempts++;
   
@@ -91,6 +112,9 @@ function showWrongAttempt() {
     }
   }
 
+/**
+ * Resets feedback visuals and counters between rounds
+ */
   function resetFeedback() {
      // Reset checkmark
      const checkmark = document.getElementById("checkmark");
@@ -110,6 +134,9 @@ function showWrongAttempt() {
      wrongAttempts = 0;
 }
 
+/**
+ * Displays a hint bubble with given text for 3 seconds
+ */
 function showHintBubble(text) {
   const bubble = document.getElementById("hint-bubble");
   if (!bubble) return;
@@ -124,12 +151,17 @@ function showHintBubble(text) {
   }, 3000);
 }
 
+// ===== Emoji Background Animation ===== //
+
 let isAnimating = true; // Controls whether emojis are animating
 
 //Background Emoji Animation
 const emojis = ["😀", "😂", "😍", "🥳", "😎", "🤖", "👻", "🎉", "🌟", "🍕", "❤️", "🔥", "🎉"];
 const animationDuration = 3000; // Duration of the animation in milliseconds
 
+/**
+ * Creates and animates a floating emoji from the bottom of the screen
+ */
 function createEmoji() {
     if (!isAnimating) return; // Stop creating emojis if animation is disabled
 
@@ -148,6 +180,9 @@ function createEmoji() {
     requestAnimationFrame(() => animateEmoji(emoji));
 }
 
+/**
+ * Animates an emoji upward and fades it out, then removes it
+ */
 function animateEmoji(emoji) {
     const startTime = performance.now();
     
@@ -173,14 +208,22 @@ function animateEmoji(emoji) {
 // Create emojis at intervals
 setInterval(createEmoji, 500); // Create a new emoji every 500 milliseconds
 
+/**
+ * Start Emoji Animation
+ */
 function startEmojiAnimation() {
     isAnimating = true;
 }
 
+/**
+ * Stop Emoji Animation
+ */
 function stopEmojiAnimation() {
     isAnimating = false;
 }
 
+
+// ===== Star Background Animation ===== //
 
 // background stars background animation
 const STAR_COLOR = '#fff';
@@ -203,6 +246,9 @@ step();
 
 window.onresize = resize;
 
+/**
+ * Creates a list of stars with random positions and depth
+ */
 function generate() {
   for (let i = 0; i < STAR_COUNT; i++) {
     stars.push({
@@ -213,18 +259,27 @@ function generate() {
   }
 }
 
+/**
+ * Places a star randomly within the canvas area
+ */
 function placeStar(star) {
   star.x = Math.random() * width;
   star.y = Math.random() * height;
   star.z = STAR_MIN_SCALE + Math.random() * (1 - STAR_MIN_SCALE);
 }
 
+/**
+ * Recycles a star by repositioning it to the far background
+ */
 function recycleStar(star) {
   star.x = Math.random() * width;
   star.y = Math.random() * height;
   star.z = STAR_MIN_SCALE;
 }
 
+/**
+ * Resizes canvas to fit window and repositions stars
+ */
 function resize() {
   scale = window.devicePixelRatio || 1;
   width = window.innerWidth * scale;
@@ -234,6 +289,9 @@ function resize() {
   stars.forEach(placeStar);
 }
 
+/**
+ * Animation step: updates and renders all stars
+ */
 function step() {
   context.clearRect(0, 0, width, height);
   update();
@@ -241,6 +299,9 @@ function step() {
   requestAnimationFrame(step);
 }
 
+/**
+ * Updates star positions by adjusting their depth
+ */
 function update() {
   stars.forEach((star) => {
     // Move the stars toward the viewer
@@ -252,6 +313,9 @@ function update() {
   });
 }
 
+/**
+ * Renders all stars to the canvas as vertical streaks
+ */
 function render() {
   stars.forEach((star) => {
     const x = (star.x - width / 2) * (1 / star.z) + width / 2;

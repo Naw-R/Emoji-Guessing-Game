@@ -1,6 +1,8 @@
 /**
  * stateManager.js
- * ----------------
+ * 
+ * Authors: Maia and Rowan
+ * 
  * This module handles all screen state transitions in the Emoji Guessing Game.
  * It controls which screen (menu, lobby, game, feedback, leaderboard) is visible
  * at any given moment, and also updates the score display and final score when needed.
@@ -35,7 +37,10 @@ if (typeof window.currentCategory === "undefined") {
     window.currentCategory = ""; // Initialize currentCategory as an empty string
 }
 
-// Function to switch between game states
+/**
+ * Handles transition between game screens and associated logic
+ * @param {string} newState - The screen to switch to (menu, game, etc.)
+ */
 function switchState(newState) {
     console.log(`switchState() called. Switching from ${currentState} to ${newState}`); // Debug log
 

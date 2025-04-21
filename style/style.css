@@ -1,3 +1,4 @@
+/* ===== Reset and Base Styles ===== */
 /* Reset default styles */
 * {
     margin: 0;
@@ -29,6 +30,7 @@ canvas {
     display: none;
 }
 
+/* ===== Game Screen Containers ===== */
 /* Style for screen containers that hold different game sections */
 .screen {
     width: 100%;
@@ -42,13 +44,14 @@ canvas {
 }
 
 /* Headings style for main titles and subtitles */
-h1{
+h1 {
     font-family: oswald;
-     font-size: 50px;
-     line-height: 1;
-     margin-bottom: 15px;
-     color: white;
+    font-size: 50px;
+    line-height: 1;
+    margin-bottom: 15px;
+    color: white;
 }
+
 h2 {
     font-size: 20px;
     margin-bottom: 5px;
@@ -57,6 +60,7 @@ h2 {
     font-weight: 600;
 }
 
+/* ===== Category Buttons ===== */
 /* Layout for category selection buttons */
 #category-buttons {
     display: flex;
@@ -78,6 +82,7 @@ h2 {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
+/* ===== Emoji Display ===== */
 /* Display style for the emoji being guessed */
 #emoji-display {
     font-size: 3rem;
@@ -90,6 +95,7 @@ h2 {
     transform: scale(1.5);
 }
 
+/* ===== Score Display ===== */
 /* Style for displaying the current game score */
 #game-score {
     font-size: 1.5rem;
@@ -98,6 +104,7 @@ h2 {
     margin: 10px 0;
 }
 
+/* ===== User Input Field ===== */
 /* Style for user input field */
 #user-input {
     width: 100%;
@@ -107,7 +114,7 @@ h2 {
     border-radius: 6px;
     text-align: center;
     transition: border 0.3s ease;
-    color:#000;
+    color: #000;
 }
 
 /* Focus state for user input field */
@@ -135,15 +142,30 @@ button {
     transition: background 0.3s ease, transform 0.2s ease;
 }
 
+/* ===== Action Buttons (Start, Submit, Return, etc.) ===== */
 /* Specific styles for start and return buttons */
-#start-game-btn, #return-menu-btn, #exit-game-btn, #submit-btn, #hint-btn, #return-feedback-btn, #submit-feedback-btn, #return-menu-from-leaderboard {
+#start-game-btn,
+#return-menu-btn,
+#exit-game-btn,
+#submit-btn,
+#hint-btn,
+#return-feedback-btn,
+#submit-feedback-btn,
+#return-menu-from-leaderboard {
     background: #1b1a1a;
     color: white;
     font-weight: bold;
 }
 
 /* Hover effect for action buttons */
-#start-game-btn:hover, #return-menu-btn:hover, #exit-game-btn:hover, #submit-btn:hover, #hint-btn:hover, #return-feedback-btn:hover, #submit-feedback-btn:hover, #return-menu-from-leaderboard:hover {
+#start-game-btn:hover,
+#return-menu-btn:hover,
+#exit-game-btn:hover,
+#submit-btn:hover,
+#hint-btn:hover,
+#return-feedback-btn:hover,
+#submit-feedback-btn:hover,
+#return-menu-from-leaderboard:hover {
     background: #000000;
     transform: scale(1.05);
 }
@@ -152,6 +174,8 @@ button {
     background: #000000;
     transform: scale(1);
 }
+
+/* ===== Feedback Input Field ===== */
 /* Style for feedback input area */
 #feedback-input {
     width: 70%;
@@ -160,8 +184,10 @@ button {
     font-size: 1rem;
     border: 2px solid #ccc;
     border-radius: 6px;
-    resize: vertical; /* Allows users to resize vertically */
-    text-align: left; /* Align text to the left */
+    resize: vertical;
+    /* Allows users to resize vertically */
+    text-align: left;
+    /* Align text to the left */
     transition: border 0.3s ease;
     color: #000;
 }
@@ -178,6 +204,7 @@ button {
     font-style: italic;
 }
 
+/* ===== Leaderboard ===== */
 /* Banner style for the leaderboard */
 .leaderboard-banner {
     position: fixed;
@@ -234,14 +261,15 @@ button {
     background-color: #000000;
 }
 
+/* ===== reCAPTCHA Positioning ===== */
 .recaptcha-container {
     display: flex;
     justify-content: center;
-    margin-top: 20px; 
+    margin-top: 20px;
 }
 
+/* ===== Game Feedback Animations ===== */
 /* Animations and Graphics*/
-
 #checkmark {
     font-size: 2rem;
     position: absolute;
@@ -263,7 +291,7 @@ button {
     justify-content: center;
     gap: 10px;
     position: relative;
-    top: 5px; 
+    top: 5px;
 }
 
 .x-icon {
@@ -279,6 +307,7 @@ button {
     animation: shake 0.4s ease;
 }
 
+/* ===== Background Visual Effects ===== */
 #background-animation {
     position: fixed;
     top: 0;
@@ -300,11 +329,13 @@ button {
     z-index: -1;
 }
 
+/* ===== Keyframes ===== */
 @keyframes slideUp {
     0% {
         transform: translateY(0);
         opacity: 1;
     }
+
     100% {
         transform: translateY(-100vh);
         opacity: 0;
@@ -317,12 +348,16 @@ button {
         transform: scale(0);
         opacity: 0;
     }
+
     50% {
-        transform: scale(1.2);  /* Slightly bigger */
+        transform: scale(1.2);
+        /* Slightly bigger */
         opacity: 1;
     }
+
     100% {
-        transform: scale(1);  /* Back to normal size */
+        transform: scale(1);
+        /* Back to normal size */
         opacity: 1;
     }
 }
@@ -331,22 +366,25 @@ button {
     0% {
         transform: translateX(0);
     }
+
     25% {
         transform: translateX(-5px);
     }
+
     50% {
         transform: translateX(5px);
     }
+
     75% {
         transform: translateX(-5px);
     }
+
     100% {
         transform: translateX(0);
     }
-  }
+}
 
-
-
+/* ===== Toast Notification ===== */
 #toast {
     position: fixed;
     bottom: 30px;
@@ -363,16 +401,17 @@ button {
     pointer-events: none;
 }
 
-  #toast.show {
-      opacity: 1;
-      transform: translateY(0);
-  }
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 #toast.show {
     opacity: 1;
     transform: translateY(0);
 }
 
+/* ===== Hint Bubble ===== */
 /* Hint bubble styles */
 #hint-bubble {
     position: relative;
@@ -385,7 +424,7 @@ button {
     padding: 12px 18px;
     border-radius: 12px;
     border: 2px solid #ffcc00;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     font-size: 1rem;
     font-weight: bold;
     text-align: center;

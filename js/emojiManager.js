@@ -1,9 +1,28 @@
-// emojiManager.js
+/**
+ * Emoji Manager
+ * Author: Rowan and Maia 
+ * 
+ * Manages the selection of emojis from different categories, 
+ * ensuring that each emoji is only shown once before the list resets. 
+ * 
+ * Functions:
+ * - getRandomEmoji(): returns a random, non-repeating emoji from a category
+ *    
+ * Uses:
+ * emojiDatabase (assumed global)
+ *   
+ * Exposed to:
+ * window.getRandomEmoji
+ */
+
 
 // Object to track used emojis for each category
 const usedEmojis = {};
 
-// Function to get a random emoji from a specific category without repeating
+/**
+ * Returns a random emoji from the given category, avoiding repetition
+ * until all options have been used, then resets.
+ */
 function getRandomEmoji(category) {
     console.log(`Getting random emoji from category: ${category}`); // Debug log
     

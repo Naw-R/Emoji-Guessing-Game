@@ -1,5 +1,7 @@
 /**
  * Main Game Script
+ *
+ * Authors: Maia and Rowan
  * 
  * Handles:
  * - Initializing player usernames
@@ -9,6 +11,10 @@
  * - Displaying top scores in the banner and full leaderboard view
  * 
  * Firebase is initialized separately via a script tag in index.html (firebaseInit.js)
+ */
+
+/**
+ * Initializes the username from localStorage or generates a default one
  */
 
 function initUsername() {
@@ -28,7 +34,9 @@ function initUsername() {
     }
 }
 
-// Set up event listeners and initialize game state once the DOM is fully loaded
+/**
+ * Once the DOM is ready, set up game and UI event listeners
+ */
 document.addEventListener("DOMContentLoaded", () => {
     initUsername(); // Initialize the username
     updateBanner(); // Update the leaderboard banner
@@ -93,7 +101,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-// Submit score to Firebase leaderboard, only if it's the user's best score
+/**
+ * Submits or updates a score in the Firebase leaderboard
+ * Only saves if new score is higher than the current one
+ */
 async function submitScore(score) {
     if (!firebase || !firebase.firestore) {
         console.error("Firebase not initialized.");
@@ -136,7 +147,9 @@ async function submitScore(score) {
     }
 }
 
-// Fetch top 3 scores and update leaderboard banner
+/**
+ * Fetches top 3 scores and updates the leaderboard banner
+ */
 async function updateBanner() {
     // Check if Firebase is initialized
     if (!firebase || !firebase.firestore) {
@@ -166,7 +179,9 @@ async function updateBanner() {
     }
 }
 
-// Load top 10 scores into leaderboard screen
+/**
+ * Loads and displays the full top 10 leaderboard in the table view
+ */
 async function showFullLeaderboard() {
     // Check if Firebase is initialized
     if (!firebase || !firebase.firestore) return; // Exit if Firebase is not set up
@@ -194,7 +209,9 @@ async function showFullLeaderboard() {
     }
 }
 
-// Submit player feedback to Firestore
+/**
+ * Submits player feedback to Firebase Firestore
+ */
 function submitFeedback(message, score, category) {
     if (!firebase || !firebase.firestore) return;
 
@@ -214,6 +231,9 @@ function submitFeedback(message, score, category) {
     });
 }
 
+/**
+ * Displays a temporary toast message on screen
+ */
 function showToast(message) {
     const toast = document.createElement('div');
     toast.id = 'toast';

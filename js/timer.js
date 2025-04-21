@@ -2,6 +2,8 @@
  * This file is responsible for managing the core gameplay functionality of the Emoji Word Guessing Game. 
  * It handles game state management, puzzle initialization, user interactions, and overall game flow.
  * 
+ * Authors: Maia and Rowan
+ * 
  * Functions Overview:
  *   - startTimer(): Starts the countdown timer and updates the UI.
  *   - resetTimer(): Resets and restarts the countdown timer for a new round.
@@ -13,7 +15,9 @@
 let timeLeft = 30;
 let timerInterval;
 
-// Function to start the countdown timer
+/**
+ * Starts a 30-second countdown and handles timeout logic
+ */
 function startTimer() {
     console.log("Timer started!"); // Debug log
     timeLeft = 30; // Reset timer to 30 seconds
@@ -34,14 +38,18 @@ function startTimer() {
     }, 1000); // Runs every second
 }
 
-// Reset Timer when starting a new round
+/**
+ * Resets and restarts the timer (called at the start of each round)
+ */
 function resetTimer() {
     console.log("Resetting timer..."); // Debug log
     clearInterval(timerInterval); // Stop current timer
     startTimer(); // Restart timer from 30s
 }
 
-// Stop the timer when the player loses or exits
+/**
+ * Stops the timer (used on game exit, win, or timeout)
+ */
 function stopTimer() {
     console.log("Stopping timer..."); // Debug log
     clearInterval(timerInterval); // Prevents further countdown

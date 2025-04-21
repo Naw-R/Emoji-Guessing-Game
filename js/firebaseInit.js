@@ -1,4 +1,18 @@
-// Initialize Firebase using compat SDK because we are not using a module bundler
+/**
+ * Firebase Initialization
+ * Authors: Rowan and Maia
+ * 
+ * Initializes Firebase for the Emoji Guessing Game using the compat SDK,
+ * since a module bundler is not being used.
+ * 
+ * Uses:
+ * - Firebase App
+ * - Firebase Analytics
+ */
+
+/**
+ * Firebase project configuration
+ */
 
 const firebaseConfig = {
   apiKey: "AIzaSyA29gnyFD26EppNFDG0Fdxnc_smYLKGEAc",
@@ -12,6 +26,6 @@ const firebaseConfig = {
 
 // Initialize Firebase only once
 if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+  firebase.initializeApp(firebaseConfig); // Sets Firebase services
+  firebase.analytics(); // Enable Tracking
 }
